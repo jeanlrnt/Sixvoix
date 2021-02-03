@@ -81,3 +81,20 @@ a  {
 .traitVertical {
   border-left: 1px white solid;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+.vip-card{
+    display: inline-grid;
+    grid-auto-columns: auto;
+    margin: 1.5rem;
+}
+
+.vip-card img{
+    height: 10rem;
+}
+
+.vip-card a{
+    font-size: larger;
+    padding-top: 1em;
+}
