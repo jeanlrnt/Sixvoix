@@ -1,0 +1,12 @@
+<div style="font-size: x-large">
+    {{> lettres}}
+</div>
+<br>
+{{#each vip}}
+    <div class="vip-card">
+        <a href="/vip/{{this.id}}">
+            <img src="/images/vip/{{this.path}}" alt="{{this.path}}">
+            <p>{{this.prenom}} {{this.nom}}</p>
+        </a>
+    </div>
+{{/each}}

@@ -1,0 +1,233 @@
+/*---CSS DE BASE------------------------------------------------------------------------------------------------------*/
+
+body {
+    font-family: "Segoe UI", "DejaVu Sans",Verdana, sans-serif;
+    background-image:-webkit-linear-gradient(#9f0909, #4e0000);
+    background-image:-o-linear-gradient(#9f0909, #4e0000);
+    background-image:linear-gradient(#9f0909, #4e0000);
+    background-size: 1rem auto;
+    min-height: 100vh;
+    font-size:0.8em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #000000;
+}
+.monBody #container {
+    max-width: 1300px;
+    margin: 0 auto;
+    background:#ffffff;
+}
+.monBody #header {
+    height:140px;
+    background-color:#000;
+    color:#fff;
+}
+
+.menu_haut {background-color:#000;color:#fff;margin-top:-13px;width:100%;}
+.menu_haut ul {
+	width:100%;
+	text-align:center;
+	height:30px;
+	margin-left:-50px;
+	margin-right:-50px;
+	}
+.menu_haut li {
+	text-decoration:none;
+	font-weight:bold;
+	display:inline;
+	font-size:14px;
+	padding:10px 10px 10px 10px;
+	color:#fff;
+	}
+.menu_haut li a {
+	color: #fff;
+	text-decoration: none;
+	display: inline;
+	height: 100%;
+	border: 0 none;
+}
+.menu_haut li a:hover {
+	color:#000;
+	background:#eee;
+}
+
+.monBody #contenu {
+    padding:20px;
+    overflow: auto;
+}
+.monBody #footer {
+    padding: 0 10px;
+    font-size:0.8em;
+    text-align:center;
+    height:150px;
+    background:url(/image/footer.jpg) no-repeat;
+}
+.baniere{float:left;
+  margin-top:20px;
+  margin-left:5px;
+  border:none;}
+
+.baniere img{
+  border:none;
+}
+
+#LogoNode {
+    max-height: 20%;
+    max-width: 20%;
+}
+
+a  {
+    text-decoration:none;
+    color:#0072ff;
+}
+
+.traitVertical {
+  border-left: 1px white solid;
+}
+
+/*---GENERAL----------------------------------------------------------------------------------------------------------*/
+
+.item {
+    display: inline;
+}
+
+p {
+    text-align: justify;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.black {
+    color: black;
+}
+
+/*---AFFICHAGE DES LETTRES DU REPERTOIRE------------------------------------------------------------------------------*/
+
+span.repertoire-letters{
+    font-size: inherit;
+}
+
+span.repertoire-letters>div{
+    margin-left: 2rem;
+    letter-spacing: 0.45rem
+}
+
+/*---AFFICHAGE DES CARTES DES VIP DANS LE REPERTOIRE------------------------------------------------------------------*/
+
+div.vip-card, .gallery-photo > a{
+    display: inline-grid;
+    grid-auto-columns: auto;
+    margin: 1.5rem;
+}
+
+div.vip-card>a>img{
+    height: 10rem;
+}
+
+div.vip-card>a>p{
+    font-size: larger;
+    text-align: center;
+}
+
+/*---PROFIL DES VIP---------------------------------------------------------------------------------------------------*/
+
+.vip-profil {
+    text-align: left;
+}
+
+.lettres {
+    text-align: right;
+    font-size: medium;
+}
+
+.lettres div.item {
+    letter-spacing: .2rem;
+    margin-left: 1rem;
+}
+
+.vip-profil>.vip-profil-img{
+    float: left;
+    margin: 0 1rem 1rem 0;
+}
+
+.vip-profil span>.label {
+    font-weight: bolder;
+}
+
+img.gallery {
+    height: 10rem;
+}
+
+.hover{
+    display: none;
+    position: absolute;
+    width: 25rem;
+    height: 8rem;
+    background-color: white;
+    padding: .7rem;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.hover h3 {
+    line-height: 0
+}
+
+.hover > div.description {
+    height: 8rem;
+    width: calc(70% - 1rem);
+    overflow: hidden;
+    padding-left: 1rem;
+}
+
+.hover > div.image{
+    height : 8rem;
+    width: 30%;
+    float: left;
+    text-align: center;
+}
+
+.hover > div.image > img{
+    max-height: 100%;
+    max-width: 100%;
+    min-width: 80%;
+    min-height: 80%;
+}
+
+.vip-list {
+    text-align: center;
+    width: 20%;
+    float: right;
+    border: 2px solid black;
+    border-radius: 5px
+}
+
+.vip-list>.list-header{
+    background: black;
+}
+
+.article {
+    width: 70%;
+    float: left
+}
+
+.article > legend {
+    text-align: left;
+}
+
+.article>.more {
+    background-color: #dcdbdb;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.article>.more>p:first-child{
+    float: left;
+}
+
+.article>.more>p:last-child{
+    float: right;
+}

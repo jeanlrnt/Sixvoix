@@ -1,0 +1,11 @@
+<div class="vip-list">
+    <div class="list-header">
+        <img src="/images/vips.png" alt="VIPS">
+    </div>
+    <div>
+        {{#each vips}}
+            <a href="/article/{{this.id}}">{{this.prenom}} {{this.nom}}</a>
+            <br>
+        {{/each}}
+    </div>
+</div>

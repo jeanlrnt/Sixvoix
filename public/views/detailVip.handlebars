@@ -1,0 +1,244 @@
+<div class="lettres">
+    {{> lettres}}
+</div>
+
+<div class="vip-profil">
+    <img class="vip-profil-img" src="/images/vip/{{vip.path}}" alt="{{vip.path}}">
+    <span>
+        <p class="label item">Nom : </p>
+        <p class="text item">{{vip.prenom}} {{vip.nom}}</p>
+    </span>
+    <br><br>
+    <span>
+        <p class="label item">Date de naissance : </p>
+        <p class="text item">{{formatDate vip.naissance 'LLLL' }}</p>
+    </span>
+    <br><br>
+    <span>
+        <p class="label item">Nationnalité : </p>
+        <p class="text item">{{vip.nationalite}}</p>
+    </span>
+    {{#if films}}
+        <br><br>
+        <span>
+            <p class="label item">Profession : </p>
+            <p class="text item">{{#ifCond vip.sexe '==' 'F'}}Actrice{{else}}Acteur{{/ifCond}}{{#if films.0.debut}} depuis {{formatDate films.0.debut 'MMMM YYYY'}}</p>{{/if}}
+        </span>
+        {{#if films.0.titre}}
+            <br>
+            <span>
+                <p class="label item">Principal(aux) role(s) : </p>
+                {{#each films}}
+                    <br>
+                    <div class="item">
+                        <p class="text item">
+                            {{#if this.role}}{{this.role}} dans le film {{/if}}"{{this.titre}}" ({{formatDate this.date_realisation 'MMMM YYYY'}}) réalisé par
+                            {{#if this.realisateur_id}}
+                                <a class="link-vip" href="/vip/{{this.realisateur_id}}">{{this.realisateur}}</a>
+                            {{else}}
+                                {{this.realisateur}}
+                            {{/if}}
+                        </p>
+                        <div class="hover">
+                            <div class="image">
+                                <img src="/images/vip/{{path}}" alt="{{this.realisateur}}">
+                            </div>
+                            <div class="description">
+                                <h3>{{this.realisateur}}</h3>
+                                <p>{{this.texte}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </span>
+        {{/if}}
+    {{/if}}
+
+    {{#if filmsRealises}}
+        <br><br>
+        <span>
+            <p class="label item">Profession : </p>
+            <p class="text item">{{#ifCond vip.sexe '==' 'F'}}Realisatrice{{else}}Realisateur{{/ifCond}}</p>
+        </span>
+        {{#if filmsRealises.0.titre}}
+            <br>
+            <span>
+                <p class="label item">Principal(aux) film(s) : </p>
+                {{#each filmsRealises}}
+                    <br>
+                    <p class="text item">"{{this.titre}}" ({{formatDate this.date_realisation 'MMMM YYYY'}})</p>
+                {{/each}}
+            </span>
+        {{/if}}
+    {{/if}}
+
+    {{#if albums}}
+        <br><br>
+        <span>
+            <p class="label item">Profession : </p>
+            <p class="text item">{{#ifCond vip.sexe '==' 'F'}}Chanteuse{{else}}Chanteur{{/ifCond}} ({{albums.0.specialite}})</p>
+        </span>
+        <br>
+        <span>
+            <p class="label item">Principal(aux) album(s) : </p>
+            {{#each albums}}
+                <br>
+                <p class="text item">"{{this.titre}}" ({{formatDate this.date_sortie 'MMMM YYYY'}}) produit par {{this.maison_disque}}</p>
+            {{/each}}
+        </span>
+    {{/if}}
+
+    {{#if defiles}}
+        <br><br>
+        <span>
+            <p class="label item">Profession : </p>
+            <p class="text item">Mannequin (Taille {{defiles.0.taille}})</p>
+        </span>
+        <br>
+        <span>
+            <p class="label item">Principal(aux) défilés(s) : </p>
+            {{#each defiles}}
+                <br>
+                <div class="item">
+                    <p class="text item">
+                    {{this.lieu}} ({{formatDate this.date_defile 'MMMM YYYY'}}) organisé par {{#if this.couturier_id}}
+                        <a class="link-vip" href="/vip/{{this.couturier_id}}">{{this.couturier}}</a>
+                    {{else}}
+                        {{this.couturier}}
+                    {{/if}}
+                    </p>
+                    <div class="hover">
+                        <div class="image">
+                            <img src="/images/vip/{{path}}" alt="{{this.couturier}}">
+                        </div>
+                        <div class="description">
+                            <h3>{{this.couturier}}</h3>
+                            <p>{{this.texte}}</p>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </span>
+    {{/if}}
+
+    {{#if defilesOrganises}}
+        <br><br>
+        <span>
+            <p class="label item">Profession : </p>
+            <p class="text item">{{#ifCond vip.sexe '==' 'F'}}Couturière{{else}}Couturier{{/ifCond}}</p>
+        </span>
+        <br>
+        <span>
+            <p class="label item">Principal(aux) défilés(s) : </p>
+            {{#each defilesOrganises}}
+                <br>
+                <p class="text item">
+                {{this.lieu}} ({{formatDate this.date_defile 'MMMM YYYY'}})
+                </p>
+            {{/each}}
+        </span>
+    {{/if}}
+
+    {{#if mariages}}
+        <br><br>
+        <span>
+            <p class="label item">Mariage(s) : </p>
+            {{#each mariages}}
+                <br>
+                <div class="item">
+                    <p class="text item">
+                        {{#if this.conjoint_id}}
+                            <a class="link-vip" href="/vip/{{this.conjoint_id}}">{{this.conjoint}}</a>
+                        {{else}}
+                            {{this.conjoint}}
+                        {{/if}}
+                        ( {{formatDate this.start 'MMMM YYYY'}}
+                        {{#if this.end}}
+                            --> {{formatDate this.end 'MMMM YYYY'}} )
+                        {{else}}
+                            )
+                        {{/if}}
+                    </p>
+                    <div class="hover">
+                        <div class="image">
+                            <img src="/images/vip/{{path}}" alt="{{this.conjoint}}">
+                        </div>
+                        <div class="description">
+                            <h3>{{this.conjoint}}</h3>
+                            <p>{{this.texte}}</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="label item"> lieu : </p>
+                <p class="text item">{{this.lieu}}</p>
+                {{#if this.motif}}
+                    <p class="label item"> raison de la rupture : </p>
+                    <p class="text item">{{this.motif}}</p>
+                {{/if}}
+            {{/each}}
+        </span>
+    {{/if}}
+
+    {{#if liaisons}}
+        <br><br>
+        <span>
+            <p class="label item">Liaison(s) : </p>
+            {{#each liaisons}}
+                <br>
+                <div class="item">
+                    <p class="text item">
+                        {{#if this.amant_id}}
+                            <a class="link-vip" href="/vip/{{this.amant_id}}">{{this.amant}}</a>
+                        {{else}}
+                            {{this.amant}}
+                        {{/if}}
+                        ( {{formatDate this.start 'MMMM YYYY'}} )
+                    </p>
+                    <div class="hover">
+                        <div class="image">
+                            <img src="/images/vip/{{path}}" alt="{{this.amant}}">
+                        </div>
+                        <div class="description">
+                            <h3>{{this.amant}}</h3>
+                            <p>{{this.texte}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{#if this.motif}}
+                    <p class="label item"> raison de la rupture : </p>
+                    <p class="text item">{{this.motif}}</p>
+                {{/if}}
+            {{/each}}
+        </span>
+    {{/if}}
+
+    <br><br>
+    <span>
+        <p class="label">Qui suis-je ? : </p>
+        <p class="text">{{vip.about}}</p>
+    </span>
+
+    <br><br>
+    <span class="gallery-photo">
+        {{#each photos}}
+            <a href="/images/vip/{{this.path}}" data-lightbox="{{vip.prenom}}-{{vip.nom}}" data-title="{{this.subject}} - {{this.comment}}">
+                <img class="gallery" src="/images/vip/{{this.path}}" alt="{{this.subject}}">
+            </a>
+        {{/each}}
+    </span>
+
+    <script>
+    $("a.link-vip").hover(function(){
+            $(this).parent().siblings("div").show();
+            $(this).mousemove(function(event){
+                let left = event.pageX + 50;
+                let top = event.pageY - 20;
+                $(this).parent().siblings("div").css({top: top,left: left});
+            })
+        }, function(){
+            $(this).parent().siblings("div").hide();
+        }
+    );
+    </script>
+</div>
+
