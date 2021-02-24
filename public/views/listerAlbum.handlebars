@@ -1,1 +1,15 @@
 <h1> Mettre ici l'album photo des stars </h1>
+<div id="albumVip">
+    <div id="photosVip">
+        {{#each photosVip}}
+            <img class="photoVip" src="/images/vip/{{this.path}}" alt="{{this.path}}" data-photo-id="{{this.id}}">
+        {{/each}}
+    </div>
+</div>
+<div id="pplist">
+    <div id="imageList">
+        {{#each pplist}}
+            <a href="/album/{{this.id}}"><img class="profile-photo" src="/images/vip/{{this.path}}" alt="{{this.path}}"></a>
+        {{/each}}
+    </div>
+</div>

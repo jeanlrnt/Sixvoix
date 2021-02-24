@@ -231,3 +231,41 @@ img.gallery {
 .article>.more>p:last-child{
     float: right;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+
+#pplist {
+    width: 24em;
+    float: right;
+    border: 2px solid gray;
+    padding: 1em;
+}
+
+#imageList {
+    height: 23em;
+    text-align: center;
+}
+
+#imageList img{
+    height: 7.5em;
+    width: 5.5em;
+    display: inline-grid;
+    grid-template-columns: 10em 10em 10em 10em;
+}
+
+#pagination {
+    vertical-align: bottom;
+    padding-top: 1em;
+}
+
+#pagination button.right {
+    float: right;
+}
+
+#pagination button.left {
+    float: left;
+}
+
+#photosVip .photoVip {
+    height: 20em;
+}

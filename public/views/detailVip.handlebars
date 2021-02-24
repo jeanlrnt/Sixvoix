@@ -226,19 +226,5 @@
             </a>
         {{/each}}
     </span>
-
-    <script>
-    $("a.link-vip").hover(function(){
-            $(this).parent().siblings("div").show();
-            $(this).mousemove(function(event){
-                let left = event.pageX + 50;
-                let top = event.pageY - 20;
-                $(this).parent().siblings("div").css({top: top,left: left});
-            })
-        }, function(){
-            $(this).parent().siblings("div").hide();
-        }
-    );
-    </script>
 </div>
 

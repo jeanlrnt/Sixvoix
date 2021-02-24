@@ -9,10 +9,10 @@ let app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('port', 6800);
-app.set('views', path.join(__dirname, '../common/views'));
+app.set('views', path.join(__dirname, '/views'));
 
 // routes static, le routeur n'y aura pas accès
-app.use(express.static(path.join(__dirname, '../common/public')));
+app.use(express.static(path.join(__dirname, '../common')));
 
 app.use(cookieParser());
 
@@ -43,5 +43,5 @@ require('./router/router')(app);
 
 
 http.createServer(app).listen(app.get('port'), function(){
-    console.log('Serveur Node.js en attente sur le port ' + app.get('port'));
+    console.log('Serveur Node.js en attente sur le port ' + app.get('port') + ' http://localhost:' + app.get('port'));
 });
