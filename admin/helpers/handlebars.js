@@ -92,6 +92,12 @@ function hbsHelpers(handlebars) {
                     default:
                         return options.inverse(this);
                 }
+            },
+            /* Exemple d'utilisation :
+            {{loud Text}}
+            This function removes accents*/
+            loud : function (aString) {
+                return aString.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             }
         }
     });

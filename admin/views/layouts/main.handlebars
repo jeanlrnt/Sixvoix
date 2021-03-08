@@ -10,30 +10,13 @@
     </head>
     <body class="monBody">
         <div id="container">
-            <div id="header">
-                <div class="baniere"><img src="/images/sixvoix.png" alt="SIXVOIX l'encyclopédie des stars" /> </div>
-            </div>
-            <div class="menu_haut">
-              <ul>
-                <li><a href="/accueil">ACCUEIL</a></li>
-                <li class="traitVertical"><a href="/repertoire">REPERTOIRE DES STARS</a></li>
-                <li class="traitVertical"><a href="/album">ALBUM PHOTO</a></li>
-                <li class="traitVertical"><a href="/articles">ARTICLES</a></li>
-              </ul>
-            </div>
+            {{>header}}
             <div id="contenu">
-                <br/>
                 {{{body}}}
             </div>
-            <div id="footer">
-                L'encyclopédie des stars depuis février 2021 (en NodeJS)
-                <br />
-                © IUT du Limousin DUT Informatique année 2
-                <br />
-                Application réalisée par <a href="https://jeanlaurent.fr">Jean LAURENT</a>
-                <br />
-                <img src="/images/nodejs.png" id= "LogoNode" alt="Logo NodeJs" title="Logo Node.JS" />
-            </div>
+            {{>footer}}
         </div>
+        <script src="/js/jquery-3.5.1.min.js"></script>
+        <script src="/js/main.js"></script>
     </body>
 </html>

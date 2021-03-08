@@ -19,12 +19,15 @@ module.exports.getPhotoVip = function(id, callback) {
 
     db.getConnection(function(err, connexion) {
         if (!err) {
-            let sql = `SELECT PHOTO_NUMERO as id, 
-                            PHOTO_SUJET as sujet, 
-                            PHOTO_COMMENTAIRE as comment, 
-                            PHOTO_ADRESSE as path 
-                        FROM photo 
-                        WHERE VIP_NUMERO=${id}`;
+            let sql = `SELECT CONCAT(VIP_PRENOM, ' ', VIP_NOM) as vip,
+                           v.VIP_NUMERO as idVip,
+                           PHOTO_NUMERO as id,
+                           PHOTO_SUJET as sujet,
+                           PHOTO_COMMENTAIRE as comment,
+                           PHOTO_ADRESSE as path
+                        FROM photo p 
+                            JOIN vip v ON v.VIP_NUMERO = p.VIP_NUMERO
+                        WHERE v.VIP_NUMERO=${id}`;
 
             connexion.query(sql, callback);
             connexion.release();

@@ -1,75 +1,90 @@
 /*---CSS DE BASE------------------------------------------------------------------------------------------------------*/
 
 body {
-    font-family: "Segoe UI", "DejaVu Sans",Verdana, sans-serif;
-    background-image:-webkit-linear-gradient(#9f0909, #4e0000);
-    background-image:-o-linear-gradient(#9f0909, #4e0000);
-    background-image:linear-gradient(#9f0909, #4e0000);
+    font-family: "Segoe UI", "DejaVu Sans", Verdana, sans-serif;
+    background-image: -webkit-linear-gradient(#9f0909, #4e0000);
+    background-image: -o-linear-gradient(#9f0909, #4e0000);
+    background-image: linear-gradient(#9f0909, #4e0000);
     background-size: 1rem auto;
     min-height: 100vh;
-    font-size:0.8em;
+    font-size: 0.8em;
     margin: 0;
     padding: 0;
     text-align: center;
     color: #000000;
 }
+
 .monBody #container {
     max-width: 1300px;
     margin: 0 auto;
-    background:#ffffff;
-}
-.monBody #header {
-    height:140px;
-    background-color:#000;
-    color:#fff;
+    background: #ffffff;
 }
 
-.menu_haut {background-color:#000;color:#fff;margin-top:-13px;width:100%;}
-.menu_haut ul {
-	width:100%;
-	text-align:center;
-	height:30px;
-	margin-left:-50px;
-	margin-right:-50px;
-	}
-.menu_haut li {
-	text-decoration:none;
-	font-weight:bold;
-	display:inline;
-	font-size:14px;
-	padding:10px 10px 10px 10px;
-	color:#fff;
-	}
-.menu_haut li a {
-	color: #fff;
-	text-decoration: none;
-	display: inline;
-	height: 100%;
-	border: 0 none;
+.monBody #header {
+    height: 140px;
+    background-color: #000;
+    color: #fff;
 }
+
+.menu_haut {
+    background-color: #000;
+    color: #fff;
+    margin-top: -13px;
+    width: 100%;
+}
+
+.menu_haut ul {
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    margin-left: -50px;
+    margin-right: -50px;
+}
+
+.menu_haut li {
+    text-decoration: none;
+    font-weight: bold;
+    display: inline;
+    font-size: 14px;
+    padding: 10px 10px 10px 10px;
+    color: #fff;
+}
+
+.menu_haut li a {
+    color: #fff;
+    text-decoration: none;
+    display: inline;
+    height: 100%;
+    border: 0 none;
+}
+
 .menu_haut li a:hover {
-	color:#000;
-	background:#eee;
+    color: #000;
+    background: #eee;
 }
 
 .monBody #contenu {
-    padding:20px;
+    padding: 20px;
     overflow: auto;
 }
+
 .monBody #footer {
     padding: 0 10px;
-    font-size:0.8em;
-    text-align:center;
-    height:150px;
-    background:url(/image/footer.jpg) no-repeat;
+    font-size: 0.8em;
+    text-align: center;
+    height: 150px;
+    background: url(/image/footer.jpg) no-repeat;
 }
-.baniere{float:left;
-  margin-top:20px;
-  margin-left:5px;
-  border:none;}
 
-.baniere img{
-  border:none;
+.baniere {
+    float: left;
+    margin-top: 20px;
+    margin-left: 5px;
+    border: none;
+}
+
+.baniere img {
+    border: none;
 }
 
 #LogoNode {
@@ -77,13 +92,17 @@ body {
     max-width: 20%;
 }
 
-a  {
-    text-decoration:none;
-    color:#0072ff;
+a {
+    text-decoration: none;
+    color: #0072ff;
 }
 
 .traitVertical {
-  border-left: 1px white solid;
+    border-left: 1px solid white;
+}
+
+.traitHorizontal {
+    border-top: 1px solid white;
 }
 
 /*---GENERAL----------------------------------------------------------------------------------------------------------*/
@@ -96,6 +115,10 @@ p {
     text-align: justify;
 }
 
+.center {
+    text-align: center;
+}
+
 .underline {
     text-decoration: underline;
 }
@@ -106,28 +129,28 @@ p {
 
 /*---AFFICHAGE DES LETTRES DU REPERTOIRE------------------------------------------------------------------------------*/
 
-span.repertoire-letters{
+span.repertoire-letters {
     font-size: inherit;
 }
 
-span.repertoire-letters>div{
+span.repertoire-letters > div {
     margin-left: 2rem;
     letter-spacing: 0.45rem
 }
 
 /*---AFFICHAGE DES CARTES DES VIP DANS LE REPERTOIRE------------------------------------------------------------------*/
 
-div.vip-card, .gallery-photo > a{
+div.vip-card, .gallery-photo > a {
     display: inline-grid;
     grid-auto-columns: auto;
     margin: 1.5rem;
 }
 
-div.vip-card>a>img{
+div.vip-card > a > img {
     height: 10rem;
 }
 
-div.vip-card>a>p{
+div.vip-card > a > p {
     font-size: larger;
     text-align: center;
 }
@@ -148,12 +171,12 @@ div.vip-card>a>p{
     margin-left: 1rem;
 }
 
-.vip-profil>.vip-profil-img{
+.vip-profil > .vip-profil-img {
     float: left;
     margin: 0 1rem 1rem 0;
 }
 
-.vip-profil span>.label {
+.vip-profil span > .label {
     font-weight: bolder;
 }
 
@@ -161,7 +184,7 @@ img.gallery {
     height: 10rem;
 }
 
-.hover{
+.hover {
     display: none;
     position: absolute;
     width: 25rem;
@@ -183,14 +206,14 @@ img.gallery {
     padding-left: 1rem;
 }
 
-.hover > div.image{
-    height : 8rem;
+.hover > div.image {
+    height: 8rem;
     width: 30%;
     float: left;
     text-align: center;
 }
 
-.hover > div.image > img{
+.hover > div.image > img {
     max-height: 100%;
     max-width: 100%;
     min-width: 80%;
@@ -205,37 +228,27 @@ img.gallery {
     border-radius: 5px
 }
 
-.vip-list>.list-header{
+.vip-list > .list-header {
     background: black;
 }
 
-.article {
-    width: 70%;
-    float: left
-}
-
-.article > legend {
-    text-align: left;
-}
-
-.article>.more {
+.article > .more {
     background-color: #dcdbdb;
     overflow: hidden;
     line-height: 0;
 }
 
-.article>.more>p:first-child{
+.article > .more > p:first-child {
     float: left;
 }
 
-.article>.more>p:last-child{
+.article > .more > p:last-child {
     float: right;
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 
 #pplist {
-    width: 24em;
     float: right;
     border: 2px solid gray;
     padding: 1em;
@@ -243,12 +256,14 @@ img.gallery {
 
 #imageList {
     height: 23em;
+    width: 23em;
     text-align: center;
 }
 
-#imageList img{
-    height: 7.5em;
-    width: 5.5em;
+#imageList img {
+    height: calc(7.5em - 2px);
+    width: calc(5.5em - 2px);
+    border: 1px solid black;
     display: inline-grid;
     grid-template-columns: 10em 10em 10em 10em;
 }
@@ -266,6 +281,131 @@ img.gallery {
     float: left;
 }
 
+#div-next, #div-prev {
+    height: 16.5em
+}
+
+#next-img, #prev-img {
+    margin: .9em 0;
+    text-align: center;
+    font-size: 5em;
+    cursor: pointer;
+    user-select: none;
+}
+
+#albumVip {
+    width: calc(100% - 26em);
+    float: left;
+    display: inline-grid;
+    grid-template-columns: 10% 80% 10%;
+}
+
+#photosVip {
+    width: 100%
+}
+
 #photosVip .photoVip {
-    height: 20em;
+    height: 16.5em;
+}
+
+fieldset legend {
+    text-align: left;
+    user-select: none;
+}
+
+#vipName {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.form-item {
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: 33% 67%;
+    margin: 1em 0;
+}
+
+#admin-container {
+    width: 70%;
+}
+
+#admin-menu {
+    float: left;
+    text-align: center;
+    width: 20%;
+    border: 2px solid black;
+    background-color: #000;
+    border-radius: 5px;
+    margin-right: 2em;
+    margin-top: 1.5em;
+}
+
+#admin-menu ul {
+    text-decoration: none;
+    display: inline-grid;
+    padding: 0;
+    width: 100%;
+}
+
+#admin-menu li {
+    border-top: 1px solid white;
+    text-decoration: none;
+    list-style-type: none;
+    width: 100%;
+    padding: 1em 0;
+}
+
+#admin-menu a li {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    width: 100%;
+}
+
+#admin-menu li:hover {
+    background-color: #fff;
+    color: black;
+}
+
+#admin-menu .list-header {
+    padding-top: 1em
+}
+
+/*---------------------------------------------------*/
+
+.col-6 {
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: 50% 50%;
+}
+
+label {
+    margin: auto 0;
+}
+
+input[type=text], input[type=date], textarea, select {
+    border-radius: 5px;
+    min-height: 2em;
+    font-size: 15px;
+    border: .15em outset lightgray
+}
+
+input[type=text]:invalid , input[type=date]:invalid, textarea:invalid, select:invalid {
+    border: 2px outset red;
+    background-color: rgba(255,0,0,0.3)
+}
+
+/*input[type=text]:valid , input[type=date]:valid, textarea:valid, select:valid {
+    border: 2px outset green;
+    background-color: rgba(0,255,0,0.3)
+}*/
+
+textarea {
+    resize: none
+}
+
+input[type=button] {
+    height: 2em;
+    width: 10em;
+    margin: auto auto;
 }

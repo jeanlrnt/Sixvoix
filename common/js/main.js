@@ -10,21 +10,42 @@ $("a.link-vip").hover(function(){
     }
 );
 
-$('.profile-photo').hover(function (){
-        $(this).parent().siblings('a').children('.profile-photo:visible').css('filter', 'blur(2px)')
+$('.profile-photo:visible').css('filter', 'grayscale(80%)').hover(function (){
+        $(this).removeAttr('style')
+        $(this).parent().siblings('a').children('.profile-photo:visible').css('filter', 'grayscale(80%) blur(2px)')
     }, function (){
-        $(this).parent().siblings('a').children('.profile-photo:visible').removeAttr('style')
+        $('.profile-photo:visible').css('filter', 'grayscale(80%)')
     })
 
 /*-----*/
+
+$(document).ready(function () {
+    profileList()
+    photoList()
+    checkPageSelected();
+})
 
 let pplist = $(".profile-photo");
 const pas = 12;
 const nbpages = Math.trunc(pplist.length/pas)
 let pageid=0;
 
+function profileList(){
+    $('#pplist').append('<div id="pagination">');
+    $('#pagination')
+        .append('<button id="start" class="left">Début</button>')
+        .append('<button id="previous" class="left">Précédent</button>')
+        .append('<button id="end" class="right">Fin</button>')
+        .append('<button id="next" class="right">Suivant</button>')
+    changePage(pageid)
+    $('#start').on('click', function (){pageid=0;changePage(pageid)})
+    $('#previous').on('click', function (){changePage(--pageid)})
+    $('#next').on('click', function (){changePage(++pageid)})
+    $('#end').on('click', function (){pageid=nbpages;changePage(pageid)})
+}
+
 function changePage(page) {
-    showButtons(page)
+    showButtonsPagination(page)
     showPageSelected(page)
 }
 
@@ -38,7 +59,7 @@ function showPageSelected(page) {
     });
 }
 
-function showButtons(page) {
+function showButtonsPagination(page) {
     if (page < 0 || page > nbpages) {
         $('#start, #previous, #next, #end').hide();
     } else {
@@ -54,25 +75,162 @@ function showButtons(page) {
     }
 }
 
-function changeImg(image) {
-    
+function checkPageSelected(){
+    let vip = $('#vipName').data('vip')
+    pplist.each(function (i){
+        if ($(this).data('vip') === vip){
+            pageid = Math.trunc(i/pas)
+            changePage(pageid);
+        }
+    })
 }
 
-$(document).ready(function () {
-    $('#pplist').append('<div id="pagination">');
-    $('#pagination')
-        .append('<button id="start" class="left">Début</button>')
-        .append('<button id="previous" class="left">Précédent</button>')
-        .append('<button id="next" class="right">Suivant</button>')
-        .append('<button id="end" class="right">Fin</button>')
-    changePage(pageid)
-    $('#start').on('click', function (){pageid=0;changePage(pageid)})
-    $('#previous').on('click', function (){changePage(--pageid)})
-    $('#next').on('click', function (){changePage(++pageid)})
-    $('#end').on('click', function (){pageid=nbpages;changePage(pageid)})
+let photoVipId = 0;
+const photoVipNum = $('.photoVip').length;
 
+function photoList(){
     $('#albumVip')
-        .prepend('<button id="prev-img">Precedent</button>')
-        .append('<button id="next-img">Suivant</button>')
-    $('#prev-img').on('click', function () {changeImg($('.photoVip:visible').data('') + 1)})
+        .prepend('<div id="div-prev"><p id="prev-img">&lt;</p></div>')
+        .append('<div id="div-next"><p id="next-img">&gt;</p></div>')
+    changeImg(photoVipId)
+    $('#prev-img').on('click', function() {changeImg(--photoVipId)})
+    $('#next-img').on('click', function() {changeImg(++photoVipId)})
+}
+
+function changeImg(image) {
+    showButtonImg(image)
+    showImg(image)
+    showComment(image)
+}
+
+function showComment(image){
+    $('.commentImg').each(function(i){
+        if (i === image){
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+function showImg(image) {
+    showButtonImg(image)
+    $('.photoVip').each(function (i){
+        if (i === image){
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    })
+}
+
+function showButtonImg(image){
+    if (image < 0 || image >= photoVipNum || photoVipNum === 1) {
+        $('#prev-img, #next-img').hide();
+    } else {
+        if (image === 0) {
+            $('#next-img').show();
+            $('#prev-img').hide();
+        } else if (image >= photoVipNum - 1) {
+            $('#next-img').hide();
+            $('#prev-img').show();
+        } else {
+            $('#prev-img, #next-img').show();
+        }
+    }
+}
+
+let film_num, real_num, chant_num, model_num, couturier_num;
+
+$(document).ready(function(){
+    $('.job-name').siblings('.job-detail').hide();
+    $('input[type=checkbox]').each(function(){
+        $(this)[0].checked = false;
+    })
+    film_num = real_num = chant_num = model_num = couturier_num = 0;
+})
+
+$('.job-name').each(function (){
+    $(this).siblings('input[type=checkbox]').on('click',function(){
+        if ($(this)[0].checked){
+            $(this).siblings('.job-detail').show();
+        } else {
+            $(this).siblings('.job-detail').hide();
+        }
+    })
+})
+
+$('.addItem').each(function(){
+    $(this).on('click',function(){
+        switch ($(this).attr('id')) {
+            case 'acteur-add' :
+                $(this).parent().append(`<div class="form-item">
+                            <label for="acteur_role_${film_num}">Rôle : </label>
+                            <input type="text" name="acteur_film_role_${film_num}" id="acteur_role_${film_num}">
+                        </div>
+                        <div class="form-item">
+                            <label for="acteur_titre_${film_num}">Film : </label>
+                            <input type="text" name="acteur_film_titre_${film_num}" id="acteur_titre_${film_num}">
+                        </div>`)
+                film_num++
+                break;
+            case 'realisateur-add' :
+                $(this).parent().append(`<div class="col-6">
+                        <div class="form-item">
+                            <label for="real_date_${real_num}">Date réalisation : </label>
+                            <input type="date" name="real_film_date_${real_num}" id="real_date_${real_num}">
+                        </div>
+                        <div class="form-item">
+                            <label for="real_titre_${real_num}">Film : </label>
+                            <input type="text" name="real_film_titre_${real_num}" id="real_titre_${real_num}">
+                        </div>
+                    </div>`)
+                real_num++
+                break;
+            case 'chanteur-add' :
+                $(this).parent().parent().append(`<div class="col-6">
+                        <div class="form-item">
+                            <label for="album_date_${chant_num}">Date de sortie : </label>
+                            <input type="date" name="chant_album_date_${chant_num}" id="album_date_${chant_num}">
+                        </div>
+                        <div class="form-item">
+                            <label for="album_titre_${chant_num}">Titre : </label>
+                            <input type="text" name="chant_album_titre_${chant_num}" id="album_titre_${chant_num}">
+                        </div>
+                        <div class="form-item">
+                            <label for="album_prod_${chant_num}">Maison de disque : </label>
+                            <input type="text" name="chant_album_prod_${chant_num}" id="album_prod_${chant_num}">
+                        </div>
+                    </div>`)
+                chant_num++
+                break;
+            case 'mannequin-add' :
+                $(this).parent().append(`<div class="col-6">
+                        <div class="form-item">
+                            <label for="model_date_${model_num}">Date : </label>
+                            <input type="date" name="model_defile_date_${model_num}" id="model_date_${model_num}">
+                        </div>
+                        <div class="form-item">
+                            <label for="model_lieu_${model_num}">Lieu : </label>
+                            <input type="text" name="model_defile_lieu_${model_num}" id="model_lieu_${model_num}">
+                        </div>
+                    </div>`)
+                model_num++
+                break;
+            case 'couturier-add' :
+                $(this).parent().append(`<div class="col-6">
+                        <div class="form-item">
+                            <label for="couturier_date_${couturier_num}">Date : </label>
+                            <input type="date" name="couturier_defile_date_${couturier_num}" id="couturier_date_${couturier_num}">
+                        </div>
+                        <div class="form-item">
+                            <label for="couturier_lieu_${couturier_num}">Lieu : </label>
+                            <input type="text" name="couturier_defile_lieu_${couturier_num}" id="couturier_lieu_${couturier_num}">
+                        </div>
+                    </div>`)
+                couturier_num++
+                break;
+            default: break;
+        }
+    })
 })

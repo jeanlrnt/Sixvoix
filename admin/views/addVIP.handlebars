@@ -1,0 +1,124 @@
+{{>menu-admin}}
+<fieldset id="admin-container">
+    <legend>
+        <p>Ajout VIPs</p>
+    </legend>
+    <div>
+        <form action="/request/add" method="post">
+            <div class="col-6">
+                <div class="form-item">
+                    <label for="nom">Nom* : </label>
+                    <input type="text" name="nom" id="nom" required>
+                </div>
+                <div class="form-item">
+                    <label for="prenom">Prénom* : </label>
+                    <input type="text" name="prenom" id="prenom" required>
+                </div>
+                <div class="form-item">
+                    <label for="sexe">Sexe : </label>
+                    <select name="sexe" id="sexe" required>
+                        <option></option>
+                        <option value="H">Masculin</option>
+                        <option value="F">Feminin</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="naissance">Date de naissance : </label>
+                    <input type="date" name="naissance" id="naissance" placeholder="jj/mm/aaaa" required>
+                </div>
+            </div>
+            <div class="form-item">
+                <label for="nationalite">Nationalité : </label>
+                <select name="nationalite" id="nationalite" required>
+                    <option></option>
+                    {{#each nationalite}}
+                        <option value="{{this.id}}">{{this.nationalite}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-item">
+                <label for="commentaire">Commentaire : </label>
+                <textarea name="commentaire" id="commentaire" rows="5" required></textarea>
+            </div>
+            <fieldset>
+                <legend>Photo de profil</legend>
+                <div class="form-item">
+                    <label for="image">Séléctionner l'image : </label>
+                    <input type="file" name="image" id="image" required>
+                </div>
+                <div class="col-6">
+                    <div class="form-item">
+                        <label for="sujet">Sujet : </label>
+                        <textarea name="sujet" id="sujet" rows="3"></textarea>
+                    </div>
+                    <div class="form-item">
+                        <label for="detail">Detail : </label>
+                        <textarea name="detail" id="detail" rows="3"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Relations</legend>
+            </fieldset>
+            <fieldset>
+                <legend>Métiers</legend>
+                <div class="job-list" id="acteur">
+                    <input type="checkbox" id="acteur-checkbox" name="acteur">
+                    <label for="acteur-checkbox" class="job-name">Acteur</label>
+                    <div class="col-6 job-detail">
+                        <div class="form-item">
+                            <label for="acteur-start">Début de carrière : </label>
+                            <input type="date" name="acteur_start" id="acteur-start">
+                        </div>
+                        <input type="button" class="addItem" id="acteur-add" value="Ajouter un rôle">
+                    </div>
+                </div>
+                <div class="job-list" id="realisateur">
+                    <input type="checkbox" id="realisateur-checkbox" name="realisateur">
+                    <label for="realisateur-checkbox" class="job-name">Realisateur</label>
+                    <div class="job-detail">
+                        <input type="button" class="addItem" id="realisateur-add" value="Ajouter un film">
+                    </div>
+                </div>
+                <div class="job-list" id="chanteur">
+                    <input type="checkbox" id="chanteur-checkbox" name="chanteur">
+                    <label for="chanteur-checkbox" class="job-name">Chanteur</label>
+                    <div class="job-detail">
+                        <div class="col-6">
+                            <div class="form-item">
+                                <label for="chanteur-specialite">Spécialité : </label>
+                                <input type="text" name="chanteur_specialite" id="chanteur-specialite">
+                            </div>
+                            <input type="button" class="addItem" id="chanteur-add" value="Ajouter un album">
+                        </div>
+                    </div>
+                </div>
+                <div class="job-list" id="mannequin">
+                    <input type="checkbox" id="mannequin-checkbox" name="mannequin">
+                    <label for="mannequin-checkbox" class="job-name">Mannequin</label>
+                    <div class="job-detail">
+                        <div class="col-6">
+                            <div class="form-item">
+                                <label for="mannequin-taille">Taille : </label>
+                                <input type="text" id="mannequin-taille">
+                            </div>
+                            <div class="form-item">
+                                <label for="mannequin-agence">Agence : </label>
+                                <input type="text" name="mannequin_agence" id="mannequin-taille">
+                            </div>
+                        </div>
+                        <input type="button" class="addItem" id="mannequin-add" value="Ajouter un défilé">
+                    </div>
+                </div>
+                <div class="job-list" id="couturier">
+                    <input type="checkbox" id="couturier-checkbox" name="couturier">
+                    <label for="couturier-checkbox" class="job-name">Couturier</label>
+                    <div class="job-detail">
+                        <input type="button" class="addItem" id="couturier-add" value="Ajouter un défilé">
+                    </div>
+                </div>
+            </fieldset>
+            <input type="submit">
+        </form>
+    </div>
+</fieldset>

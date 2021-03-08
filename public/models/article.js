@@ -31,7 +31,7 @@ module.exports.getAllArticles = function(number, callback) {
                         FROM article 
                             JOIN apoursujet a ON article.ARTICLE_NUMERO = a.ARTICLE_NUMERO 
                             JOIN vip v ON v.VIP_NUMERO = a.VIP_NUMERO
-                        ORDER BY 3 DESC LIMIT ${number}`;
+                        ORDER BY 3 DESC LIMIT ${connexion.escape(number)}`;
 
             connexion.query(sql, callback);
             connexion.release();

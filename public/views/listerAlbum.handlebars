@@ -1,15 +1,36 @@
-<h1> Mettre ici l'album photo des stars </h1>
-<div id="albumVip">
-    <div id="photosVip">
-        {{#each photosVip}}
-            <img class="photoVip" src="/images/vip/{{this.path}}" alt="{{this.path}}" data-photo-id="{{this.id}}">
-        {{/each}}
+<div id="album">
+    <div id="pplist">
+        <div id="imageList">
+            {{#each pplist}}
+                <a href="/album/{{this.id}}"><img class="profile-photo" src="/images/vip/{{this.path}}" alt="{{this.path}}" data-vip="{{this.id}}"></a>
+            {{/each}}
+        </div>
     </div>
-</div>
-<div id="pplist">
-    <div id="imageList">
-        {{#each pplist}}
-            <a href="/album/{{this.id}}"><img class="profile-photo" src="/images/vip/{{this.path}}" alt="{{this.path}}"></a>
-        {{/each}}
-    </div>
+    {{#if photosVip}}
+        <p class="center" id="vipName" data-vip="{{photosVip.0.idVip}}">{{photosVip.0.vip}}</p>
+        <div id="albumVip">
+            <div id="photosVip">
+                {{#each photosVip}}
+                    <img class="photoVip" src="/images/vip/{{this.path}}" alt="{{this.path}}" data-photo-id="{{this.id}}">
+                {{/each}}
+            </div>
+        </div>
+        <div id="comment-img">
+            {{#each photosVip}}
+                <fieldset class="commentImg" data-photo-id="{{this.id}}">
+                    <legend>
+                        <p>{{this.sujet}}</p>
+                    </legend>
+                    <p class="center">{{this.comment}}</p>
+                </fieldset>
+            {{/each}}
+        </div>
+    {{else}}
+        <fieldset>
+            <legend>
+                Album
+            </legend>
+            <p class="center">Choisissez un vip pour voir les photos associées</p>
+        </fieldset>
+    {{/if}}
 </div>
