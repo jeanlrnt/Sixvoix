@@ -100,11 +100,16 @@
                         <div class="col-6">
                             <div class="form-item">
                                 <label for="mannequin-taille">Taille : </label>
-                                <input type="text" id="mannequin-taille">
+                                <input type="text" name="mannequin_taille" id="mannequin-taille">
                             </div>
                             <div class="form-item">
                                 <label for="mannequin-agence">Agence : </label>
-                                <input type="text" name="mannequin_agence" id="mannequin-taille">
+                                <select name="mannequin_agence" id="mannequin-agence" required>
+                                    <option></option>
+                                    {{#each agence}}
+                                        <option value="{{this.id}}">{{this.agence}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                         </div>
                         <input type="button" class="addItem" id="mannequin-add" value="Ajouter un défilé">
