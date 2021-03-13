@@ -147,7 +147,8 @@ $(document).ready(function(){
     $('input[type=checkbox]').each(function(){
         $(this)[0].checked = false;
     })
-    film_num = real_num = chant_num = model_num = couturier_num = 0;
+    film_num = model_num = chant_num = 1;
+    real_num = couturier_num = 0;
 })
 
 $('.job-name').each(function (){
@@ -164,13 +165,19 @@ $('.addItem').each(function(){
     $(this).on('click',function(){
         switch ($(this).attr('id')) {
             case 'acteur-add' :
+                let options_film_str;
+                $('#acteur_titre_0').children().each(function() {
+                    options_film_str += $(this)[0].outerHTML
+                })
                 $(this).parent().append(`<div class="form-item">
                             <label for="acteur_role_${film_num}">Rôle : </label>
                             <input type="text" name="acteur_film_role_${film_num}" id="acteur_role_${film_num}">
                         </div>
                         <div class="form-item">
                             <label for="acteur_titre_${film_num}">Film : </label>
-                            <input type="text" name="acteur_film_titre_${film_num}" id="acteur_titre_${film_num}">
+                            <select name="acteur_film_titre_${film_num}" id="acteur_titre_${film_num}">
+                                ${options_film_str}
+                            </select>
                         </div>`)
                 film_num++
                 break;
@@ -188,6 +195,10 @@ $('.addItem').each(function(){
                 real_num++
                 break;
             case 'chanteur-add' :
+                let options_maison_str;
+                $('#album_prod_0').children().each(function() {
+                    options_maison_str += $(this)[0].outerHTML
+                })
                 $(this).parent().parent().append(`<div class="col-6">
                         <div class="form-item">
                             <label for="album_date_${chant_num}">Date de sortie : </label>
@@ -199,20 +210,26 @@ $('.addItem').each(function(){
                         </div>
                         <div class="form-item">
                             <label for="album_prod_${chant_num}">Maison de disque : </label>
-                            <input type="text" name="chant_album_prod_${chant_num}" id="album_prod_${chant_num}">
+                            <select name="chant_album_prod_${chant_num}" id="album_prod_${chant_num}">
+                                ${options_maison_str}
+                            </select>
                         </div>
                     </div>`)
                 chant_num++
                 break;
             case 'mannequin-add' :
-                $(this).parent().append(`<div class="col-6">
-                        <div class="form-item">
-                            <label for="model_date_${model_num}">Date : </label>
-                            <input type="date" name="model_defile_date_${model_num}" id="model_date_${model_num}">
-                        </div>
-                        <div class="form-item">
-                            <label for="model_lieu_${model_num}">Lieu : </label>
-                            <input type="text" name="model_defile_lieu_${model_num}" id="model_lieu_${model_num}">
+                let options_defile_str;
+                $('#model_lieu_0').children().each(function() {
+                    options_defile_str += $(this)[0].outerHTML
+                })
+                $(this).parent().append(`<div>
+                        <div class="col-6">
+                            <div class="form-item">
+                                <label for="model_lieu_${model_num}">Défilé ${model_num + 1} : </label>
+                                <select name="model_defile_lieu_${model_num}" id="model_lieu_${model_num}">
+                                    ${options_defile_str}
+                                </select>
+                            </div>
                         </div>
                     </div>`)
                 model_num++

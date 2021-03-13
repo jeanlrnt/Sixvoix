@@ -1,6 +1,7 @@
 let express         = require('express'),
     session         = require('express-session'),
     cookieParser    = require('cookie-parser'),
+    fileUpload      = require('express-fileupload'),
     bodyParser      = require('body-parser'), //pour récupérer les résultats des post
     http            = require('http'),
     path            = require('path');
@@ -13,6 +14,11 @@ app.set('views', path.join(__dirname, '/views'));
 
 // routes static, le routeur n'y aura pas accès
 app.use(express.static(path.join(__dirname, '../common')));
+
+// Enable file upload using express-fileupload
+app.use(fileUpload({
+    createParentPath: true
+}));
 
 app.use(cookieParser());
 

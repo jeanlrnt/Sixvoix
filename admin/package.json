@@ -13,6 +13,7 @@
     "cookie-parser": ">=1.4",
     "cryptr": "^6.0.2",
     "express": "4.17.1",
+    "express-fileupload": "^1.2.1",
     "express-handlebars": "5.2.0",
     "express-session": ">1.12",
     "moment": "2.29",

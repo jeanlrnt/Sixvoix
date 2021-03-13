@@ -4,7 +4,11 @@
         <p>Ajout VIPs</p>
     </legend>
     <div>
-        <form action="/request/add" method="post">
+        <form ref='uploadForm'
+              id='uploadForm'
+              action="/request/add"
+              method="post"
+              encType="multipart/form-data">
             <div class="col-6">
                 <div class="form-item">
                     <label for="nom">Nom* : </label>
@@ -71,6 +75,19 @@
                             <input type="date" name="acteur_start" id="acteur-start">
                         </div>
                         <input type="button" class="addItem" id="acteur-add" value="Ajouter un rôle">
+                        <div class="form-item">
+                            <label for="acteur_role_0">Rôle : </label>
+                            <input type="text" name="acteur_film_role_0" id="acteur_role_0">
+                        </div>
+                        <div class="form-item">
+                            <label for="acteur_titre_0">Film : </label>
+                            <select name="acteur_film_titre_0" id="acteur_titre_0">
+                                <option></option>
+                                {{#each films}}
+                                    <option value="{{this.id}}" class="film">{{this.titre}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="job-list" id="realisateur">
@@ -91,6 +108,25 @@
                             </div>
                             <input type="button" class="addItem" id="chanteur-add" value="Ajouter un album">
                         </div>
+                        <div class="col-6">
+                            <div class="form-item">
+                                <label for="album_date_0">Date de sortie : </label>
+                                <input type="date" name="chant_album_date_0" id="album_date_0">
+                            </div>
+                            <div class="form-item">
+                                <label for="album_titre_0">Titre : </label>
+                                <input type="text" name="chant_album_titre_0" id="album_titre_0">
+                            </div>
+                            <div class="form-item">
+                                <label for="album_prod_0">Maison de disque : </label>
+                                <select name="chant_album_prod_0" id="album_prod_0">
+                                    <option></option>
+                                    {{#each maisons_de_disque}}
+                                        <option value="{{this.id}}">{{this.nom}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="job-list" id="mannequin">
@@ -104,7 +140,7 @@
                             </div>
                             <div class="form-item">
                                 <label for="mannequin-agence">Agence : </label>
-                                <select name="mannequin_agence" id="mannequin-agence" required>
+                                <select name="mannequin_agence" id="mannequin-agence">
                                     <option></option>
                                     {{#each agence}}
                                         <option value="{{this.id}}">{{this.agence}}</option>
@@ -112,7 +148,19 @@
                                 </select>
                             </div>
                         </div>
-                        <input type="button" class="addItem" id="mannequin-add" value="Ajouter un défilé">
+                        <input type="button" class="addItem" id="mannequin-add" value="Ajouter un défilé"><div class="col-6">
+                        <div>
+                            <div class="form-item">
+                                <label for="model_lieu_0">Défilé 1 : </label>
+                                <select name="model_defile_lieu_0" id="model_lieu_0">
+                                    <option></option>
+                                    {{#each defiles}}
+                                        <option value="{{this.id}}">{{this.lieu}} le {{formatDate this.date 'LLLL'}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                 <div class="job-list" id="couturier">
