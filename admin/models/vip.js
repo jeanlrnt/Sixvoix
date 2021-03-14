@@ -93,8 +93,8 @@ module.exports.addVipFilm = function (id, date, film, callback) {
     db.getConnection(function (err, connexion) {
         if (!err) {
             let sql = `INSERT INTO film SET
-                            VIP_NUMERO=${connexion.escape(id)}
-                            FILM_TITRE=${connexion.escape(film)}
+                            VIP_NUMERO=${connexion.escape(id)},
+                            FILM_TITRE=${connexion.escape(film)},
                             FILM_DATEREALISATION=${connexion.escape(date)}`;
 
             connexion.query(sql, callback);
@@ -131,8 +131,8 @@ module.exports.addAlbum = function (date, titre, producteur, callback) {
     db.getConnection(function (err, connexion) {
         if (!err) {
             let sql = `INSERT INTO album SET 
-                            ALBUM_DATE="${connexion.escape(date)}", 
-                            ALBUM_TITRE="${connexion.escape(titre)}", 
+                            ALBUM_DATE=${connexion.escape(date)}, 
+                            ALBUM_TITRE=${connexion.escape(titre)}, 
                             MAISONDISQUE_NUMERO=${connexion.escape(producteur)}`;
 
             connexion.query(sql, callback);
@@ -165,13 +165,23 @@ module.exports.addAlbumToVip = function (id, album, callback) {
  * @param {number} agence   - Id de l'agence du mannequin
  * @param callback
  */
-module.exports.addMannequin = function (id, taille, agence, callback) {
+module.exports.addMannequin = function (id, taille, callback) {
     db.getConnection(function (err, connexion) {
         if (!err) {
             let sql = `INSERT INTO mannequin SET 
                             VIP_NUMERO=${connexion.escape(id)},
-                            MANNEQUIN_TAILLE='${connexion.escape(taille)}';
-                       INSERT INTO apouragence SET
+                            MANNEQUIN_TAILLE=${connexion.escape(taille)}`;
+
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    })
+}
+
+module.exports.addVipAgence = function (id, agence, callback) {
+    db.getConnection(function (err, connexion) {
+        if (!err) {
+            let sql = `INSERT INTO apouragence SET 
                             VIP_NUMERO=${connexion.escape(id)},
                             AGENCE_NUMERO=${connexion.escape(agence)}`;
 
@@ -190,7 +200,7 @@ module.exports.addVipDefile = function (id, defile, callback) {
     db.getConnection(function (err, connexion) {
         if (!err) {
             let sql = `INSERT INTO defiledans SET 
-                            DEFILE_NUMERO=${connexion.escape(defile)}, 
+                            DEFILE_NUMERO=${connexion.escape(Number(defile))}, 
                             VIP_NUMERO=${connexion.escape(id)}`;
 
             connexion.query(sql, callback);
@@ -228,6 +238,30 @@ module.exports.addVipDefileOrga = function (id, date, lieu, callback) {
                             VIP_NUMERO=${connexion.escape(id)}, 
                             DEFILE_DATE=${connexion.escape(date)}, 
                             DEFILE_LIEU=${connexion.escape(lieu)}`;
+
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    })
+}
+
+/**
+ * @param {number} id           - Id de la photo
+ * @param {number} photo_num    - Numéro de la photo
+ * @param {string} adresse      - Adresse de la photo
+ * @param {string} sujet        - Sujet de la photo
+ * @param {string} commentaire  - Commentaire de la photo
+ * @param callback
+ */
+module.exports.addPhoto = function (id, photo_num, adresse, sujet, commentaire, callback) {
+    db.getConnection(function (err, connexion) {
+        if (!err) {
+            let sql = `INSERT INTO photo SET 
+                            VIP_NUMERO=${connexion.escape(id)}, 
+                            PHOTO_NUMERO=${connexion.escape(photo_num)}, 
+                            PHOTO_ADRESSE=${connexion.escape(adresse)}, 
+                            PHOTO_SUJET=${connexion.escape(sujet)}, 
+                            PHOTO_COMMENTAIRE=${connexion.escape(commentaire)}`;
 
             connexion.query(sql, callback);
             connexion.release();

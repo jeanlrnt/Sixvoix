@@ -247,6 +247,27 @@ $('.addItem').each(function(){
                     </div>`)
                 couturier_num++
                 break;
+            case 'photo-add' :
+                $(this).parent().append(`<div>
+                    <div class="form-item">
+                        <label for="image_file">Séléctionner une photo : </label>
+                        <input type="file"
+                               name="image_file"
+                               id="image_file"
+                               accept=".jpg,.png,.jpeg"
+                               required>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-item">
+                            <label for="image_sujet">Sujet : </label>
+                            <textarea name="image_sujet" id="image_sujet" rows="2"></textarea>
+                        </div>
+                        <div class="form-item">
+                            <label for="image_detail">Detail : </label>
+                            <textarea name="image_detail" id="image_detail" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>`)
             default: break;
         }
     })

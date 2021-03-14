@@ -45,24 +45,32 @@
                 <textarea name="commentaire" id="commentaire" rows="5" required></textarea>
             </div>
             <fieldset>
-                <legend>Photo de profil</legend>
-                <div class="form-item">
-                    <label for="image">Séléctionner l'image : </label>
-                    <input type="file" name="image" id="image" required>
-                </div>
-                <div class="col-6">
+                <legend>Photos</legend>
+                <div>
                     <div class="form-item">
-                        <label for="sujet">Sujet : </label>
-                        <textarea name="sujet" id="sujet" rows="3"></textarea>
+                        <label for="image_profil_file">Séléctionner la photo de profil : </label>
+                        <input type="file"
+                               name="image_profil_file"
+                               id="image_profil_file"
+                               accept=".jpg,.png,.jpeg"
+                               required>
                     </div>
-                    <div class="form-item">
-                        <label for="detail">Detail : </label>
-                        <textarea name="detail" id="detail" rows="3"></textarea>
+                    <div class="col-6">
+                        <div class="form-item">
+                            <label for="image_profil_sujet">Sujet : </label>
+                            <textarea name="image_profil_sujet" id="image_profil_sujet" rows="2" required></textarea>
+                        </div>
+                        <div class="form-item">
+                            <label for="image_profil_detail">Detail : </label>
+                            <textarea name="image_profil_detail" id="image_profil_detail" rows="2" required></textarea>
+                        </div>
                     </div>
                 </div>
+                <input type="button" value="Ajouter une photo" class="addItem" id="photo-add">
             </fieldset>
             <fieldset>
                 <legend>Relations</legend>
+                <div class="relation-liste" id="mariage"></div>
             </fieldset>
             <fieldset>
                 <legend>Métiers</legend>

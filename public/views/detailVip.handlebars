@@ -3,21 +3,25 @@
 </div>
 
 <div class="vip-profil">
-    <img class="vip-profil-img" src="/images/vip/{{vip.path}}" alt="{{vip.path}}">
-    <span>
-        <p class="label item">Nom : </p>
-        <p class="text item">{{vip.prenom}} {{vip.nom}}</p>
-    </span>
-    <br><br>
-    <span>
-        <p class="label item">Date de naissance : </p>
-        <p class="text item">{{formatDate vip.naissance 'LLLL' }}</p>
-    </span>
-    <br><br>
-    <span>
-        <p class="label item">Nationnalité : </p>
-        <p class="text item">{{vip.nationalite}}</p>
-    </span>
+    <div id="profil">
+        <img class="vip-profil-img" id="vip_main_img" src="/images/vip/{{vip.path}}" alt="{{vip.path}}">
+        <div id="profil-desc">
+            <span>
+                <p class="label item">Nom : </p>
+                <p class="text item">{{vip.prenom}} {{vip.nom}}</p>
+            </span>
+            <br><br>
+            <span>
+                <p class="label item">Date de naissance : </p>
+                <p class="text item">{{formatDate vip.naissance 'LLLL' }}</p>
+            </span>
+            <br><br>
+            <span>
+                <p class="label item">Nationnalité : </p>
+                <p class="text item">{{vip.nationalite}}</p>
+            </span>
+        </div>
+    </div>
     {{#if films}}
         <br><br>
         <span>

@@ -161,6 +161,10 @@ div.vip-card > a > p {
     text-align: left;
 }
 
+#vip_main_img {
+    width: 10em;
+}
+
 .lettres {
     text-align: right;
     font-size: medium;
@@ -169,6 +173,14 @@ div.vip-card > a > p {
 .lettres div.item {
     letter-spacing: .2rem;
     margin-left: 1rem;
+}
+
+#profil{
+    display: inline-flex;
+}
+
+#profil-desc {
+    margin:2em
 }
 
 .vip-profil > .vip-profil-img {
