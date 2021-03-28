@@ -1,9 +1,29 @@
 <div id="header">
-    <div class="baniere"><img src="/images/sixvoix.png" alt="SIXVOIX l'encyclopédie des stars" /> </div>
+    <div class="baniere"><img src="/images/sixvoix.png" alt="SIXVOIX l'encyclopédie des stars"/></div>
+
+    {{#if session.username}}
+        <div class="connexion">
+            <p>Bonjour <b>{{session.username}}</b> <a href="/deconnexion">Déconnexion</a></p>
+        </div>
+    {{else}}
+        <div class="connexion">
+            <p><a href="/">Connexion</a></p>
+        </div>
+    {{/if}}
 </div>
-<div class="menu_haut">
-    <ul>
-        <li><a href="/vip">VIPS</a></li>
-        <li class="traitVertical"><a href="/photo">PHOTOS</a></li>
-    </ul>
-</div>
+
+{{#if session.username}}
+    <div class="menu_haut">
+        <ul>
+            <li {{#ifCond session.menu '==' 'vip'}}class="menu_selected"{{/ifCond}}>
+                <a href="/vip">VIPS</a>
+            </li>
+            <li {{#ifCond session.menu '==' 'photo'}}class="menu_selected"{{/ifCond}}>
+                <a href="/photo">PHOTOS</a>
+            </li>
+            <li {{#ifCond session.menu '==' 'article'}}class="menu_selected"{{/ifCond}}>
+                <a href="/article">ARTICLE</a>
+            </li>
+        </ul>
+    </div>
+{{/if}}

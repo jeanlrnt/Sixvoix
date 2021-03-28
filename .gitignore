@@ -3,5 +3,6 @@
 *.*~
 package-lock.json
 # Ignorer tous le repertoire node_modules
-*/node_modules
+admin/node_modules
+public/node_modules
 .idea/*

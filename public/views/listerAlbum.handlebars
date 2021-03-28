@@ -7,7 +7,7 @@
         </div>
     </div>
     {{#if photosVip}}
-        <p class="center" id="vipName" data-vip="{{photosVip.0.idVip}}">{{photosVip.0.vip}}</p>
+        <p class="center" id="vipName" data-vip="{{photosVip.0.idVip}}"><a href="/vip/{{photosVip.0.idVip}}">{{photosVip.0.vip}}</a></p>
         <div id="albumVip">
             <div id="photosVip">
                 {{#each photosVip}}

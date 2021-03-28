@@ -1,0 +1,36 @@
+{{>menu-admin-article}}
+{{#if vip}}
+    <h2>Veuillez sélectionner le vip auquel vous voulez modifier un article</h2>
+    <table id="vip_table">
+        <thead>
+        {{#each thead}}
+            {{#ifCond this '==' 'id'}}
+                <td>{{Caps this}}</td>
+            {{else}}
+                <th class="{{this}}">{{Caps this}}</th>
+            {{/ifCond}}
+        {{/each}}
+        <td>MODIFIER</td>
+        <td>SELECTIONNER</td>
+        </thead>
+        <tbody>
+        {{#each vip}}
+            <tr>
+                {{#each this}}
+                    <td class="{{@key}}">
+                        {{#ifCond @key '==' 'nom'}}
+                            {{Caps this}}
+                        {{else}}
+                            {{this}}
+                        {{/ifCond}}
+                    </td>
+                {{/each}}
+                <td><a href="/article/edit/{{this.id}}"><img src="/images/edit.png" alt="edit" width="15px"></a></td>
+                <td><a href="/article/delete/{{this.id}}"><img src="/images/green-arrow.png" alt="select" width="15px"></a></td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <h3>Il n'y a malheureusement pas de vip, ayant des articles, disponible dans la base de données</h3>
+{{/if}}

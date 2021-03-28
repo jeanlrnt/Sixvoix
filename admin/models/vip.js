@@ -1,27 +1,26 @@
 let db = require('../configDb');
 
-module.exports.getVipInfos = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} nationalite  - Id de la nationnalité
+ * @param {string} nom          - Nom du vip
+ * @param {string} prenom       - Prénom du vip
+ * @param {'H','F'} sexe        - Genre du vip
+ * @param {Date} naissance      - Date de naissance du vip
+ * @param {string} text         - Commentaire du vip
+ * @param callback
+ */
+module.exports.addVip = (nationalite, nom, prenom, sexe, naissance, text, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
-            let sql = `SELECT * FROM vip`;
-
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-module.exports.addVip = function (nationalite, nom, prenom, sexe, naissance, text, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO vip SET 
-                            NATIONALITE_NUMERO=${connexion.escape(nationalite)}, 
-                            VIP_NOM=${connexion.escape(nom)}, 
-                            VIP_PRENOM=${connexion.escape(prenom)}, 
-                            VIP_SEXE=${connexion.escape(sexe)}, 
-                            VIP_NAISSANCE=${connexion.escape(naissance)}, 
-                            VIP_TEXTE=${connexion.escape(text)}, 
-                            VIP_DATE_INSERTION=FROM_UNIXTIME(${Date.now()} / 1000)`;
+            let sql
+            sql = `INSERT INTO vip SET 
+                        NATIONALITE_NUMERO=${connexion.escape(nationalite)}, 
+                        VIP_NOM=${connexion.escape(nom)}, 
+                        VIP_PRENOM=${connexion.escape(prenom)}, 
+                        VIP_SEXE=${connexion.escape(sexe)}, 
+                        VIP_NAISSANCE=${connexion.escape(naissance)}, 
+                        VIP_TEXTE=${connexion.escape(text)}, 
+                        VIP_DATE_INSERTION=FROM_UNIXTIME(${Date.now()} / 1000)`;
 
             connexion.query(sql, callback);
             connexion.release();
@@ -30,16 +29,27 @@ module.exports.addVip = function (nationalite, nom, prenom, sexe, naissance, tex
 }
 
 /**
- * @param {number} id   - Id de l'acteur
- * @param {Date} debut  - Date de début de carrière
+ * @param {number} id           - Id du vip
+ * @param {number} nationalite  - Id de la nationnalité
+ * @param {string} nom          - Nom du vip
+ * @param {string} prenom       - Prénom du vip
+ * @param {'H','F'} sexe        - Genre du vip
+ * @param {Date} naissance      - Date de naissance du vip
+ * @param {string} text         - Commentaire du vip
  * @param callback
  */
-module.exports.addActeur = function (id, debut, callback) {
-    db.getConnection(function (err, connexion) {
+module.exports.updateVip = (id, nationalite, nom, prenom, sexe, naissance, text, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
-            let sql = `INSERT INTO acteur SET 
-                            VIP_NUMERO=${id}, 
-                            ACTEUR_DATEDEBUT='${debut}';`;
+            let sql
+            sql = `UPDATE vip 
+                    SET NATIONALITE_NUMERO=${connexion.escape(nationalite)}, 
+                        VIP_NOM=${connexion.escape(nom)}, 
+                        VIP_PRENOM=${connexion.escape(prenom)}, 
+                        VIP_SEXE=${connexion.escape(sexe)}, 
+                        VIP_NAISSANCE=${connexion.escape(naissance)}, 
+                        VIP_TEXTE=${connexion.escape(text)}
+                    WHERE VIP_NUMERO=${connexion.escape(id)}`;
 
             connexion.query(sql, callback);
             connexion.release();
@@ -48,33 +58,13 @@ module.exports.addActeur = function (id, debut, callback) {
 }
 
 /**
- * @param {number} id       - Id de l'acteur
- * @param {string} role     - Role de l'acteur
- * @param {number} filmId   - Id du film
+ * @param {number} id   - Id du vip
  * @param callback
  */
-module.exports.addVipRole = function (id, role, filmId, callback) {
-    db.getConnection(function (err, connexion) {
+module.exports.removeVip = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
-            let sql = `INSERT INTO joue SET 
-                            VIP_NUMERO=${connexion.escape(id)}, 
-                            FILM_NUMERO=${connexion.escape(Number(filmId))}, 
-                            ROLE_NOM=${connexion.escape(role)}`
-
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-/**
- * @param {number} id   - Id du réalisateur
- * @param callback
- */
-module.exports.addRealisateur = function (id, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO realisateur SET 
+            let sql =  `DELETE FROM vip WHERE 
                             VIP_NUMERO=${connexion.escape(id)}`;
 
             connexion.query(sql, callback);
@@ -84,186 +74,128 @@ module.exports.addRealisateur = function (id, callback) {
 }
 
 /**
- * @param {number} id   - Id du réalisateur
- * @param {Date} date   - Date de sortie du film
- * @param {string} film - Titre du film
  * @param callback
  */
-module.exports.addVipFilm = function (id, date, film, callback) {
-    db.getConnection(function (err, connexion) {
+module.exports.getVipFirstLetters = (callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
-            let sql = `INSERT INTO film SET
-                            VIP_NUMERO=${connexion.escape(id)},
-                            FILM_TITRE=${connexion.escape(film)},
-                            FILM_DATEREALISATION=${connexion.escape(date)}`;
+            let sql = `SELECT DISTINCT SUBSTRING(VIP_NOM,1,1) AS letter FROM vip ORDER BY VIP_NOM`;
 
             connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+
+/**
+ * @param {char} lettre - Première lettre du nom des vips à séléctionner
+ * @param callback
+ */
+module.exports.getVipsSelection = (lettre, callback) => {
+    db.getConnection((err, connexion) => {
+        if (!err) {
+            let sql = `SELECT vip.VIP_NUMERO AS id, 
+                            VIP_NOM AS nom, 
+                            VIP_PRENOM AS prenom, 
+                            PHOTO_ADRESSE AS path 
+                        FROM vip 
+                            JOIN photo ON vip.VIP_NUMERO=photo.VIP_NUMERO 
+                        WHERE SUBSTRING(VIP_NOM,1,1)=${connexion.escape(lettre)} AND PHOTO_NUMERO=1 ORDER BY 1`;
+
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipFromId = (id, callback) => {
+    db.getConnection((err, connexion) => {
+        if (!err) {
+            let sql = `SELECT
+                           NATIONALITE_NUMERO AS nationalite,
+                           VIP_NOM AS nom,
+                           VIP_PRENOM AS prenom,
+                           VIP_SEXE AS sexe,
+                           VIP_NAISSANCE AS naissance,
+                           VIP_TEXTE AS description
+                       FROM vip
+                       WHERE VIP_NUMERO=${connexion.escape(id)}`
+
+            connexion.query(sql, callback)
             connexion.release();
         }
     })
 }
 
 /**
- * @param {number} id           - Id du chanteur
- * @param {string} specialite   - Spécialité du chanteur
  * @param callback
  */
-module.exports.addChanteur = function (id, specialite, callback) {
-    db.getConnection(function (err, connexion) {
+module.exports.getAllVips = (callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
-            let sql = `INSERT INTO chanteur SET 
-                            VIP_NUMERO=${connexion.escape(id)},
-                            CHANTEUR_SPECIALITE=${connexion.escape(specialite)}`;
+            let sql = `SELECT 
+                            VIP_NUMERO AS id, 
+                            NATIONALITE_NOM AS nationalite, 
+                            VIP_NOM AS nom, 
+                            VIP_PRENOM AS prenom, 
+                            VIP_SEXE AS sexe, 
+                            VIP_NAISSANCE AS naissance
+                       FROM vip.vip v 
+                           JOIN nationalite n ON 
+                               v.NATIONALITE_NUMERO = n.NATIONALITE_NUMERO
+                               ORDER BY 1`
 
-            connexion.query(sql, callback);
+            connexion.query(sql, callback)
             connexion.release();
         }
     })
 }
 
 /**
- * @param {Date} date           - Date de sortie de l'album
- * @param {string} titre        - Titre de l'album
- * @param {number} producteur   - Id de la maison de disque
  * @param callback
  */
-module.exports.addAlbum = function (date, titre, producteur, callback) {
-    db.getConnection(function (err, connexion) {
+module.exports.getAllVipsWithPhotoNum = (callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
-            let sql = `INSERT INTO album SET 
-                            ALBUM_DATE=${connexion.escape(date)}, 
-                            ALBUM_TITRE=${connexion.escape(titre)}, 
-                            MAISONDISQUE_NUMERO=${connexion.escape(producteur)}`;
+            let sql = `SELECT
+                           v.VIP_NUMERO AS id,
+                           VIP_NOM AS nom,
+                           VIP_PRENOM AS prenom,
+                           COUNT(PHOTO_ADRESSE) AS photos
+                       FROM vip.vip v
+                                JOIN photo p ON
+                           v.VIP_NUMERO = p.VIP_NUMERO
+                       WHERE PHOTO_NUMERO > 1
+                       GROUP BY p.VIP_NUMERO
+                       ORDER BY 1`
 
-            connexion.query(sql, callback);
+            connexion.query(sql, callback)
             connexion.release();
         }
     })
 }
 
 /**
- * @param {number} id       - Id du chanteur
- * @param {number} album    - Id de l'album
  * @param callback
  */
-module.exports.addAlbumToVip = function (id, album, callback) {
-    db.getConnection(function (err, connexion) {
+module.exports.getAllVipsWithArticleNum = (callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
-            let sql = `INSERT INTO composer SET 
-                            VIP_NUMERO=${connexion.escape(id)}, 
-                            ALBUM_NUMERO=${connexion.escape(album)}`;
+            let sql = `SELECT
+                           v.VIP_NUMERO AS id,
+                           VIP_NOM AS nom,
+                           VIP_PRENOM AS prenom,
+                           COUNT(ARTICLE_NUMERO) AS articles
+                       FROM vip.vip v
+                            JOIN apoursujet a ON v.VIP_NUMERO = a.VIP_NUMERO 
+                       GROUP BY a.VIP_NUMERO
+                       ORDER BY 1`
 
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-/**
- * @param {number} id       - Id du mannequin
- * @param {string} taille   - Taille du mannequin
- * @param {number} agence   - Id de l'agence du mannequin
- * @param callback
- */
-module.exports.addMannequin = function (id, taille, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO mannequin SET 
-                            VIP_NUMERO=${connexion.escape(id)},
-                            MANNEQUIN_TAILLE=${connexion.escape(taille)}`;
-
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-module.exports.addVipAgence = function (id, agence, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO apouragence SET 
-                            VIP_NUMERO=${connexion.escape(id)},
-                            AGENCE_NUMERO=${connexion.escape(agence)}`;
-
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-/**
- * @param {number} id       - Id du mannequin
- * @param {number} defile   - Id du défilé
- * @param callback
- */
-module.exports.addVipDefile = function (id, defile, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO defiledans SET 
-                            DEFILE_NUMERO=${connexion.escape(Number(defile))}, 
-                            VIP_NUMERO=${connexion.escape(id)}`;
-
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-/**
- * @param {number} id   - Id du couturier
- * @param callback
- */
-module.exports.addCouturier = function (id, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO couturier SET 
-                            VIP_NUMERO=${connexion.escape(id)}`;
-
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-/**
- * @param {number} id   - Id du couturier
- * @param {Date} date   - Date du défilé
- * @param {string} lieu - Lieu du défilé
- * @param callback
- */
-module.exports.addVipDefileOrga = function (id, date, lieu, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO defile SET 
-                            VIP_NUMERO=${connexion.escape(id)}, 
-                            DEFILE_DATE=${connexion.escape(date)}, 
-                            DEFILE_LIEU=${connexion.escape(lieu)}`;
-
-            connexion.query(sql, callback);
-            connexion.release();
-        }
-    })
-}
-
-/**
- * @param {number} id           - Id de la photo
- * @param {number} photo_num    - Numéro de la photo
- * @param {string} adresse      - Adresse de la photo
- * @param {string} sujet        - Sujet de la photo
- * @param {string} commentaire  - Commentaire de la photo
- * @param callback
- */
-module.exports.addPhoto = function (id, photo_num, adresse, sujet, commentaire, callback) {
-    db.getConnection(function (err, connexion) {
-        if (!err) {
-            let sql = `INSERT INTO photo SET 
-                            VIP_NUMERO=${connexion.escape(id)}, 
-                            PHOTO_NUMERO=${connexion.escape(photo_num)}, 
-                            PHOTO_ADRESSE=${connexion.escape(adresse)}, 
-                            PHOTO_SUJET=${connexion.escape(sujet)}, 
-                            PHOTO_COMMENTAIRE=${connexion.escape(commentaire)}`;
-
-            connexion.query(sql, callback);
+            connexion.query(sql, callback)
             connexion.release();
         }
     })

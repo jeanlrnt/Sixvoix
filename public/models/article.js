@@ -1,7 +1,11 @@
 let db = require('../configDb');
 
-module.exports.getVipArticles = function(id, callback) {
-    db.getConnection(function(err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipArticles = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT ARTICLE_TITRE AS titre, 
                             ARTICLE_RESUME AS resume, 
@@ -20,8 +24,12 @@ module.exports.getVipArticles = function(id, callback) {
     });
 };
 
-module.exports.getAllArticles = function(number, callback) {
-    db.getConnection(function(err, connexion) {
+/**
+ * @param {number} number   - Nombre d'articles
+ * @param callback
+ */
+module.exports.getAllArticles = (number, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT ARTICLE_TITRE AS titre, 
                             ARTICLE_RESUME AS resume, 
@@ -39,8 +47,11 @@ module.exports.getAllArticles = function(number, callback) {
     });
 };
 
-module.exports.getAllVipAuteur = function (callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param callback
+ */
+module.exports.getAllVipAuteur = (callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT distinct v.VIP_NUMERO AS id, 
                             VIP_NOM AS nom, 

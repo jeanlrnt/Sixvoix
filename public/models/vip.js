@@ -1,7 +1,10 @@
 let db = require('../configDb');
 
-module.exports.getRepertoireLetters = function(callback) {
-    db.getConnection(function(err, connexion) {
+/**
+ * @param callback
+ */
+module.exports.getRepertoireLetters = (callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT DISTINCT SUBSTRING(VIP_NOM,1,1) AS letter FROM vip ORDER BY VIP_NOM`;
 
@@ -11,8 +14,12 @@ module.exports.getRepertoireLetters = function(callback) {
     });
 };
 
-module.exports.getRepertoireResult = function(lettre, callback) {
-    db.getConnection(function(err, connexion) {
+/**
+ * @param {char} lettre  - Première lettre du nom des vips
+ * @param callback
+ */
+module.exports.getRepertoireResult = (lettre, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT vip.VIP_NUMERO AS id, 
                             VIP_NOM AS nom, 
@@ -28,8 +35,12 @@ module.exports.getRepertoireResult = function(lettre, callback) {
     });
 };
 
-module.exports.getVipInfos = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipInfos = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT v.VIP_NUMERO AS id,
                             VIP_NOM AS nom,
@@ -50,8 +61,12 @@ module.exports.getVipInfos = function (id, callback) {
     })
 }
 
-module.exports.getVipMariages = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipMariages = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT DATE_EVENEMENT AS start, 
                             MARIAGE_LIEU AS lieu, 
@@ -86,8 +101,12 @@ module.exports.getVipMariages = function (id, callback) {
     })
 }
 
-module.exports.getVipLiaisons = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipLiaisons = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT DATE_EVENEMENT AS start, 
                             LIAISON_MOTIFFIN AS motif, 
@@ -118,8 +137,12 @@ module.exports.getVipLiaisons = function (id, callback) {
     })
 }
 
-module.exports.getVipPhotos = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipPhotos = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT PHOTO_NUMERO AS photo_id, 
                             VIP_NUMERO AS vip_id, 

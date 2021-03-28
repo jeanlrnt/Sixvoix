@@ -98,6 +98,12 @@ function hbsHelpers(handlebars) {
             This function removes accents*/
             loud : function (aString) {
                 return aString.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            },
+            /*
+            * {{Caps text}}
+            */
+            Caps : function (aString) {
+                return aString.toUpperCase()
             }
         }
     });

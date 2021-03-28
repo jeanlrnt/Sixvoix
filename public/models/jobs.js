@@ -1,7 +1,11 @@
 let db = require('../configDb');
 
-module.exports.getVipAlbums = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipAlbums = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT CHANTEUR_SPECIALITE AS specialite, 
                             MAISONDISQUE_NOM AS maison_disque, 
@@ -20,8 +24,12 @@ module.exports.getVipAlbums = function (id, callback) {
     })
 }
 
-module.exports.getVipPhotos = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipPhotos = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT PHOTO_NUMERO AS photo_id, 
                             VIP_NUMERO AS vip_id, 
@@ -37,8 +45,12 @@ module.exports.getVipPhotos = function (id, callback) {
     })
 }
 
-module.exports.getVipDefiles = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipDefiles = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT DEFILE_DATE AS date_defile, 
                             DEFILE_LIEU AS lieu, 
@@ -63,8 +75,12 @@ module.exports.getVipDefiles = function (id, callback) {
     })
 }
 
-module.exports.getDefilesOrganises = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getDefilesOrganises = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT DEFILE_LIEU AS lieu, 
                             DEFILE_DATE AS date_defile 
@@ -77,8 +93,12 @@ module.exports.getDefilesOrganises = function (id, callback) {
     })
 }
 
-module.exports.getVipFilms = function (id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getVipFilms = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT a.VIP_NUMERO as acteur_id, 
                             ROLE_NOM AS role, 
@@ -102,8 +122,12 @@ module.exports.getVipFilms = function (id, callback) {
     })
 }
 
-module.exports.getFilmsRealises = function(id, callback) {
-    db.getConnection(function (err, connexion) {
+/**
+ * @param {number} id   - Id du vip
+ * @param callback
+ */
+module.exports.getFilmsRealises = (id, callback) => {
+    db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `SELECT FILM_TITRE AS titre, 
                             FILM_DATEREALISATION AS date_realisation 

@@ -25,7 +25,11 @@ module.exports = function(app){
     app.get('/album/:id', AlbumController.AlbumVip);
 
 // tout le reste
-    app.get('*', HomeController.NotFound);
-    app.post('*', HomeController.NotFound);
+
+    app.get('/error/404', HomeController.Error404)
+    app.post('/error/404', HomeController.Error404)
+
+    app.get('*', HomeController.NotFound)
+    app.post('*', HomeController.NotFound)
 
 };

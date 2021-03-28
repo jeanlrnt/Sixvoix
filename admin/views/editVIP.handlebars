@@ -1,0 +1,314 @@
+{{>menu-admin}}
+{{reponseRequette}}
+{{#if vip}}
+    <fieldset id="admin-container">
+        <legend>
+            <p>Ajouter un VIP</p>
+        </legend>
+        <div>
+            <form action=""
+                  method="post">
+                <div class="col-6">
+                    <div class="form-item">
+                        <label for="nom">Nom* : </label>
+                        <input type="text" name="nom" id="nom" value="{{vip.0.nom}}" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="prenom">Prénom* : </label>
+                        <input type="text" name="prenom" id="prenom"  value="{{vip.0.prenom}}" required>
+                    </div>
+                    <div class="form-item">
+                        <label for="sexe">Sexe : </label>
+                        <select name="sexe" id="sexe" required>
+                            <option></option>
+                            <option value="M" {{#ifCond vip.0.sexe '===' 'M'}}selected{{/ifCond}}>Masculin</option>
+                            <option value="F" {{#ifCond vip.0.sexe '===' 'F'}}selected{{/ifCond}}>Feminin</option>
+                        </select>
+                    </div>
+                    <div class="form-item">
+                        <label for="naissance">Date de naissance : </label>
+                        <input type="date" name="naissance" id="naissance" value="{{formatDate vip.0.naissance 'YYYY-MM-DD'}}" placeholder="jj/mm/aaaa" required>
+                    </div>
+                </div>
+                <div class="form-item">
+                    <label for="nationalite">Nationalité : </label>
+                    <select name="nationalite" id="nationalite" required>
+                        <option></option>
+                        {{#each nationalites}}
+                            <option value="{{this.id}}" {{#ifCond this.id '===' ../vip.0.nationalite}}selected{{/ifCond}}>{{this.nationalite}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label for="commentaire">Commentaire : </label>
+                    <textarea name="commentaire" id="commentaire" rows="5" required>{{vip.0.description}}</textarea>
+                </div>
+                <fieldset>
+                    <legend>Relations</legend>
+                    <div class="job-list" id="mariage">
+                        <input type="checkbox" id="mariage_checkbox" name="mariage" {{#if mariages}}checked{{/if}}>
+                        <label for="mariage_checkbox" class="job-name">Mariage</label>
+                        <div class="job-detail">
+                            <div class="form-item" style="display: none">
+                                <label for="select_conjoint"></label>
+                                <select id="select_conjoint">
+                                    <option></option>
+                                    {{#each conjoint}}
+                                        <option value="{{this.id}}">{{this.nom}} {{this.prenom}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            {{#each mariages}}
+                                <div class="col-6">
+                                    <div class="form-item">
+                                        <label for="mariage_vip_date_{{@index}}">Date : </label>
+                                        <input type="date" name="mariage_vip_date_{{@index}}" id="mariage_vip_date_{{@index}}" value="{{formatDate this.date 'YYYY-MM-DD'}}">
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="mariage_vip_lieu_{{@index}}">Lieu : </label>
+                                        <input type="text" name="mariage_vip_lieu_{{@index}}" id="mariage_vip_lieu_{{@index}}" value="{{this.lieu}}">
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="mariage_vip_conjoint_{{@index}}">Conjoint : </label>
+                                        <select name="mariage_vip_conjoint_{{@index}}" id="mariage_vip_conjoint_{{@index}}">
+                                            <option></option>
+                                            {{#each ../conjoint}}
+                                                <option value="{{this.id}}" class="conjoint" {{#ifCond this.id '===' ../this.conjoint_id}}selected{{/ifCond}}>{{this.nom}} {{this.prenom}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="form-item checkbox">
+                                        <input type="checkbox" id="mariage_vip_rupture_checkbox_{{@index}}" name="rupture_mariage_{{@index}}" {{#if this.fin}}checked{{/if}}>
+                                        <label for="mariage_vip_rupture_checkbox_{{@index}}" class="rupture_mariage">Rupture</label>
+                                    </div>
+                                    <div class="form-item rupture">
+                                        <label for="mariage_vip_date_fin_{{@index}}">Date : </label>
+                                        <input type="date" name="mariage_vip_date_fin_{{@index}}" id="mariage_vip_date_fin_{{@index}}" value="{{#if this.fin}}{{formatDate this.fin 'YYYY-MM-DD'}}{{/if}}">
+                                    </div>
+                                    <div class="form-item rupture">
+                                        <label for="mariage_vip_motif_fin_{{@index}}">Motif : </label>
+                                        <input type="text" name="mariage_vip_motif_fin_{{@index}}" id="mariage_vip_motif_fin_{{@index}}" value="{{this.motif}}">
+                                    </div>
+                                </div>
+                            {{/each}}
+
+                            <input type="button" class="addItem" id="mariage-add" value="Ajouter un mariage">
+                        </div>
+                    </div>
+                    <div class="job-list" id="liaison">
+                        <input type="checkbox" id="liaison_checkbox" name="liaison" {{#if liaisons}}checked{{/if}}>
+                        <label for="liaison_checkbox" class="job-name">Liaison</label>
+                        <div class="job-detail">
+                            <div class="form-item" style="display: none">
+                                <label for="select_amant"></label>
+                                <select id="select_amant">
+                                    <option></option>
+                                    {{#each conjoint}}
+                                        <option value="{{this.id}}">{{this.nom}} {{this.prenom}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            {{#each liaisons}}
+                                <div class="col-6">
+                                    <div class="form-item">
+                                        <label for="liaison_vip_date_{{@index}}">Date : </label>
+                                        <input type="date" name="liaison_vip_date_{{@index}}" id="liaison_vip_date_{{@index}}" value="{{formatDate this.date 'YYYY-MM-DD'}}">
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="liaison_vip_amant_{{@index}}">Amant : </label>
+                                        <select name="liaison_vip_amant_{{@index}}" id="liaison_vip_amant_{{@index}}">
+                                            <option></option>
+                                            {{#each ../conjoint}}
+                                                <option value="{{this.id}}" class="amant" {{#ifCond this.id '===' ../this.amant_id}}selected{{/ifCond}}>{{this.nom}} {{this.prenom}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="form-item checkbox">
+                                        <input type="checkbox" id="liaison_vip_rupture_checkbox_{{@index}}" name="rupture_liaison_{{@index}}" {{#if this.motif}}checked{{/if}}>
+                                        <label for="liaison_vip_rupture_checkbox_{{@index}}" class="rupture_liaison">Rupture</label>
+                                    </div>
+                                    <div class="form-item rupture">
+                                        <label for="liaison_vip_motif_fin_{{@index}}">Motif : </label>
+                                        <input type="text" name="liaison_vip_motif_fin_{{@index}}" id="liaison_vip_motif_fin_{{@index}}" value="{{this.motif}}">
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <input type="button" class="addItem" id="liaison-add" value="Ajouter une liaison">
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Métiers</legend>
+                    <div class="job-list" id="acteur">
+                        <input type="checkbox" id="acteur-checkbox" name="acteur" {{#if acteur}}checked{{/if}}>
+                        <label for="acteur-checkbox" class="job-name">Acteur</label>
+                        <div class="col-6 job-detail">
+                            <div class="form-item">
+                                <label for="acteur-start">Début de carrière : </label>
+                                <input type="date" name="acteur_start" id="acteur-start" {{#if acteur}}value="{{formatDate acteur.0.debut 'YYYY-MM-DD'}}"{{/if}}>
+                            </div>
+                            <input type="button" class="addItem" id="acteur-add" value="Ajouter un rôle">
+                            <div class="form-item" style="display: none">
+                                <label for="select_roles"></label>
+                                <select id="select_roles">
+                                    <option></option>
+                                    {{#each films}}
+                                        <option value="{{this.id}}">{{this.titre}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            {{#each roles}}
+                                <div class="form-item">
+                                    <label for="acteur_role_{{inc @index}}">Rôle : </label>
+                                    <input type="text" name="acteur_film_role_{{inc @index}}" id="acteur_role_{{inc @index}}" value="{{this.role}}">
+                                </div>
+                                <div class="form-item">
+                                    <label for="acteur_titre_{{inc @index}}">Film : </label>
+                                    <select name="acteur_film_titre_{{inc @index}}" id="acteur_titre_{{inc @index}}">
+                                        <option></option>
+                                        {{#each ../films}}
+                                            <option value="{{this.id}}" class="film" {{#ifCond this.id '===' ../this.film_id}}selected{{/ifCond}}>{{this.titre}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="job-list" id="realisateur">
+                        <input type="checkbox" id="realisateur-checkbox" name="realisateur" {{#if realisateur}}checked{{/if}}>
+                        <label for="realisateur-checkbox" class="job-name">Realisateur</label>
+                        <div class="job-detail">
+                            {{#each films_real}}
+                                <div class="col-6">
+                                    <input type="hidden" name="real_film_num_{{@index}}" value="{{this.film}}">
+                                    <div class="form-item">
+                                        <label for="real_date_{{@index}}">Date réalisation : </label>
+                                        <input type="date" name="real_film_date_{{@index}}" id="real_date_{{@index}}" value="{{formatDate this.date 'YYYY-MM-DD'}}">
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="real_titre_{{@index}}">Film : </label>
+                                        <input type="text" name="real_film_titre_{{@index}}" id="real_titre_{{@index}}" value="{{this.titre}}">
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <input type="button" class="addItem" id="realisateur-add" value="Ajouter un film">
+                        </div>
+                    </div>
+                    <div class="job-list" id="chanteur">
+                        <input type="checkbox" id="chanteur-checkbox" name="chanteur" {{#if chanteur}}checked{{/if}}>
+                        <label for="chanteur-checkbox" class="job-name">Chanteur</label>
+                        <div class="job-detail">
+                            <div class="col-6">
+                                <div class="form-item">
+                                    <label for="chanteur-specialite">Spécialité : </label>
+                                    <input type="text" name="chanteur_specialite" id="chanteur-specialite" value="{{chanteur.0.specialite}}">
+                                </div>
+                                <input type="button" class="addItem" id="chanteur-add" value="Ajouter un album">
+                            </div>
+                            <div class="form-item" style="display: none">
+                                <label for="select_maison"></label>
+                                <select id="select_maison">
+                                    <option></option>
+                                    {{#each maisons_de_disque}}
+                                        <option value="{{this.id}}">{{this.nom}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            {{#each albums}}
+                                <div class="col-6">
+                                    <div class="form-item">
+                                        <label for="album_date_{{@index}}">Date de sortie : </label>
+                                        <input type="date" name="chant_album_date_{{@index}}" id="album_date_{{@index}}" value="{{formatDate this.date 'YYYY-MM-DD'}}">
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="album_titre_{{@index}}">Titre : </label>
+                                        <input type="text" name="chant_album_titre_{{@index}}" id="album_titre_{{@index}}" value="{{this.titre}}">
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="album_prod_{{@index}}">Maison de disque : </label>
+                                        <select name="chant_album_prod_{{@index}}" id="album_prod_{{@index}}">
+                                            <option></option>
+                                            {{#each ../maisons_de_disque}}
+                                                <option value="{{this.id}}" {{#ifCond this.id '===' ../this.maison}}selected{{/ifCond}}>{{this.nom}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    <div class="job-list" id="mannequin">
+                        <input type="checkbox" id="mannequin-checkbox" name="mannequin" {{#if mannequin}}checked{{/if}}>
+                        <label for="mannequin-checkbox" class="job-name">Mannequin</label>
+                        <div class="job-detail">
+                            <div class="col-6">
+                                <div class="form-item">
+                                    <label for="mannequin-taille">Taille : </label>
+                                    <input type="text" name="mannequin_taille" id="mannequin-taille" value="{{mannequin.0.taille}}">
+                                </div>
+                                <div class="form-item">
+                                    <label for="mannequin-agence">Agence : </label>
+                                    <select name="mannequin_agence" id="mannequin-agence">
+                                        <option></option>
+                                        {{#each agences}}
+                                            <option value="{{this.id}}" {{#ifCond this.id '===' ../mannequin_agence.0.id}}selected{{/ifCond}}>{{this.agence}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-item" style="display: none">
+                                <label for="select_defile"></label>
+                                <select id="select_defile">
+                                    <option></option>
+                                    {{#each defiles}}
+                                        <option value="{{this.id}}">{{this.lieu}} le {{formatDate this.date 'LLLL'}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            {{#each mannequin_defiles}}
+                                <div>
+                                    <div class="col-6">
+                                        <div class="form-item">
+                                            <label for="model_lieu_{{@index}}">Défilé {{inc @index}} : </label>
+                                            <select name="model_defile_lieu_{{@index}}" id="model_lieu_{{@index}}">
+                                                <option></option>
+                                                {{#each ../defiles}}
+                                                    <option value="{{this.id}}" {{#ifCond this.id '===' ../this.defile_id}}selected{{/ifCond}}>{{this.lieu}} le {{formatDate this.date 'LLLL'}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <input type="button" class="addItem" id="mannequin-add" value="Ajouter un défilé"><div class="col-6">
+                        </div>
+                        </div>
+                    </div>
+                    <div class="job-list" id="couturier">
+                        <input type="checkbox" id="couturier-checkbox" name="couturier" {{#if couturier}}checked{{/if}}>
+                        <label for="couturier-checkbox" class="job-name">Couturier</label>
+                        <div class="job-detail">
+                            {{#each couturier_defiles}}
+                                <div class="col-6">
+                                    <input type="hidden" name="couturier_defile_num_{{@index}}" value="{{this.defile_id}}">
+                                    <div class="form-item">
+                                        <label for="couturier_date_{{@index}}">Date : </label>
+                                        <input type="date" name="couturier_defile_date_{{@index}}" id="couturier_date_{{@index}}" value="{{formatDate this.date 'YYYY-MM-DD'}}">
+                                    </div>
+                                    <div class="form-item">
+                                        <label for="couturier_lieu_{{@index}}">Lieu : </label>
+                                        <input type="text" name="couturier_defile_lieu_{{@index}}" id="couturier_lieu_{{@index}}" value="{{this.lieu}}">
+                                    </div>
+                                </div>
+                            {{/each}}
+                            <input type="button" class="addItem" id="couturier-add" value="Ajouter un défilé">
+                        </div>
+                    </div>
+                </fieldset>
+                <input type="submit">
+            </form>
+        </div>
+    </fieldset>
+{{else}}
+    <script>location.href = `${location.origin}/vip`</script>
+{{/if}}

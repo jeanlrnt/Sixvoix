@@ -1,0 +1,39 @@
+{{>menu-admin-photo}}
+<fieldset>
+    <legend>Ajout d'une photo</legend>
+    <div>
+        <form ref='uploadForm'
+              id='uploadForm'
+              action=""
+              method="post"
+              encType="multipart/form-data">
+            <div class="col-6 form-item">
+                <label for="vip_num">Nom du vip : </label>
+                <select name="vip_num" id="vip_num" required>
+                    <option></option>
+                    {{#each vips}}
+                        <option value="{{this.id}}">{{this.nom}} {{this.prenom}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-6 form-item">
+                <label for="image_file">Adresse de la photo : </label>
+                <input type="file"
+                       name="image_file"
+                       id="image_file"
+                       accept=".jpg,.png,.jpeg"
+                       required>
+            </div>
+            <div class="col-6 form-item">
+                <label for="titre">Titre : </label>
+                <input type="text" name="titre" id="titre" required>
+            </div>
+            <div class="col-6 form-item">
+                <label for="commentaire">Un petit commentaire ? </label>
+                <textarea name="commentaire" id="commentaire" cols="30" rows="5" required></textarea>
+            </div>
+            <input type="submit">
+            <input type="reset">
+        </form>
+    </div>
+</fieldset>

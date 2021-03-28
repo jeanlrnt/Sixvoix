@@ -31,7 +31,7 @@ app.use(session({
 
 /* ces lignes permettent d'utiliser directement les variables de session dans handlebars
  UTILISATION : {{session.MaVariable}}  */
-app.use(function(request, response, next){
+app.use((request, response, next) => {
     response.locals.session = request.session;
     next();
 });
@@ -48,6 +48,6 @@ app.engine('handlebars', handlebars.engine);
 require('./router/router')(app);
 
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), () => {
     console.log('Serveur Node.js admin en attente sur le port ' + app.get('port') + ' http://localhost:' + app.get('port'));
 });

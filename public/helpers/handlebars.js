@@ -92,6 +92,12 @@ function hbsHelpers(handlebars) {
                     default:
                         return options.inverse(this);
                 }
+            },
+            /*
+            * {{Caps text}}
+            */
+            Caps : function (aString) {
+                return aString.toUpperCase()
             }
         }
     });

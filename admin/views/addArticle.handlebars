@@ -1,0 +1,37 @@
+{{>menu-admin-article}}
+<fieldset>
+    <legend>Ajout d'un article</legend>
+    <div>
+        <form action=""
+              method="post">
+            <div class="col-6 form-item">
+                <label for="vip_num">Nom du vip : </label>
+                <select name="vip_num" id="vip_num" required>
+                    <option></option>
+                    {{#each vips}}
+                        <option value="{{this.id}}">{{this.nom}} {{this.prenom}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-6 form-item">
+                <label for="article_titre">Titre de l'article : </label>
+                <input type="text" id="article_titre" name="article_titre" required>
+            </div>
+            <div class="col-6 form-item">
+                <label for="article_exemplaire">Exemplaire de l'article : </label>
+                <select name="article_exemplaire" id="article_exemplaire" required>
+                    <option></option>
+                    {{#each exemplaires}}
+                        <option value="{{this.numero}}">{{formatDate this.date "DD MMMM YYYY"}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-6 form-item">
+                <label for="article_resume">Résumé : </label>
+                <textarea name="article_resume" id="article_resume" cols="30" rows="5" required></textarea>
+            </div>
+            <input type="submit">
+            <input type="reset">
+        </form>
+    </div>
+</fieldset>

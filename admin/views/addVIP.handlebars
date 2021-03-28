@@ -1,12 +1,13 @@
 {{>menu-admin}}
+{{reponseRequette}}
 <fieldset id="admin-container">
     <legend>
-        <p>Ajout VIPs</p>
+        <p>Ajouter un VIP</p>
     </legend>
     <div>
         <form ref='uploadForm'
               id='uploadForm'
-              action="/request/add"
+              action=""
               method="post"
               encType="multipart/form-data">
             <div class="col-6">
@@ -22,7 +23,7 @@
                     <label for="sexe">Sexe : </label>
                     <select name="sexe" id="sexe" required>
                         <option></option>
-                        <option value="H">Masculin</option>
+                        <option value="M">Masculin</option>
                         <option value="F">Feminin</option>
                     </select>
                 </div>
@@ -70,12 +71,98 @@
             </fieldset>
             <fieldset>
                 <legend>Relations</legend>
-                <div class="relation-liste" id="mariage"></div>
+                <div class="job-list" id="mariage">
+                    <input type="checkbox" id="mariage_checkbox" class="unchecked" name="mariage">
+                    <label for="mariage_checkbox" class="job-name">Mariage</label>
+                    <div class="job-detail">
+                        <div class="form-item" style="display: none">
+                            <label for="select_conjoint"></label>
+                            <select id="select_conjoint">
+                                <option></option>
+                                {{#each conjoint}}
+                                    <option value="{{this.id}}">{{this.nom}} {{this.prenom}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-item">
+                                <label for="mariage_vip_date_0">Date : </label>
+                                <input type="date" name="mariage_vip_date_0" id="mariage_vip_date_0">
+                            </div>
+                            <div class="form-item">
+                                <label for="mariage_vip_lieu_0">Lieu : </label>
+                                <input type="text" name="mariage_vip_lieu_0" id="mariage_vip_lieu_0">
+                            </div>
+                            <div class="form-item">
+                                <label for="mariage_vip_conjoint_0">Conjoint : </label>
+                                <select name="mariage_vip_conjoint_0" id="mariage_vip_conjoint_0">
+                                    <option></option>
+                                    {{#each conjoint}}
+                                        <option value="{{this.id}}" class="conjoint">{{this.nom}} {{this.prenom}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-item checkbox">
+                                <input type="checkbox" id="mariage_vip_rupture_checkbox_0" class="unchecked" name="rupture_mariage_0">
+                                <label for="mariage_vip_rupture_checkbox_0" class="rupture_mariage">Rupture</label>
+                            </div>
+                            <div class="form-item rupture">
+                                <label for="mariage_vip_date_fin_0">Date : </label>
+                                <input type="date" name="mariage_vip_date_fin_0" id="mariage_vip_date_fin">
+                            </div>
+                            <div class="form-item rupture">
+                                <label for="mariage_vip_motif_fin_0">Motif : </label>
+                                <input type="text" name="mariage_vip_motif_fin_0" id="mariage_vip_motif_fin_0">
+                            </div>
+                        </div>
+                        <input type="button" class="addItem" id="mariage-add" value="Ajouter un mariage">
+                    </div>
+                </div>
+                <div class="job-list" id="liaison">
+                    <input type="checkbox" id="liaison_checkbox" class="unchecked" name="liaison">
+                    <label for="liaison_checkbox" class="job-name">Liaison</label>
+                    <div class="job-detail">
+                        <div class="form-item" style="display: none">
+                            <label for="select_amant"></label>
+                            <select id="select_amant">
+                                <option></option>
+                                {{#each conjoint}}
+                                    <option value="{{this.id}}">{{this.nom}} {{this.prenom}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-item">
+                                <label for="liaison_vip_date_0">Date : </label>
+                                <input type="date" name="liaison_vip_date_0" id="liaison_vip_date_0">
+                            </div>
+                            <div class="form-item">
+                                <label for="liaison_vip_amant_0">Amant : </label>
+                                <select name="liaison_vip_amant_0" id="liaison_vip_amant_0">
+                                    <option></option>
+                                    {{#each conjoint}}
+                                        <option value="{{this.id}}" class="amant">{{this.nom}} {{this.prenom}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-item checkbox">
+                                <input type="checkbox" id="liaison_vip_rupture_checkbox_0" class="unchecked" name="rupture_liaison_0">
+                                <label for="liaison_vip_rupture_checkbox_0" class="rupture_liaison">Rupture</label>
+                            </div>
+                            <div class="form-item rupture">
+                                <label for="liaison_vip_motif_fin_0">Motif : </label>
+                                <input type="text" name="liaison_vip_motif_fin_0" id="liaison_vip_motif_fin_0">
+                            </div>
+                        </div>
+                        <input type="button" class="addItem" id="liaison-add" value="Ajouter une liaison">
+                    </div>
+
+                </div>
             </fieldset>
             <fieldset>
                 <legend>Métiers</legend>
                 <div class="job-list" id="acteur">
-                    <input type="checkbox" id="acteur-checkbox" name="acteur">
+                    <input type="checkbox" id="acteur-checkbox" class="unchecked" name="acteur">
                     <label for="acteur-checkbox" class="job-name">Acteur</label>
                     <div class="col-6 job-detail">
                         <div class="form-item">
@@ -83,6 +170,15 @@
                             <input type="date" name="acteur_start" id="acteur-start">
                         </div>
                         <input type="button" class="addItem" id="acteur-add" value="Ajouter un rôle">
+                        <div class="form-item" style="display: none">
+                            <label for="select_roles"></label>
+                            <select id="select_roles">
+                                <option></option>
+                                {{#each films}}
+                                    <option value="{{this.id}}">{{this.titre}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
                         <div class="form-item">
                             <label for="acteur_role_0">Rôle : </label>
                             <input type="text" name="acteur_film_role_0" id="acteur_role_0">
@@ -99,14 +195,14 @@
                     </div>
                 </div>
                 <div class="job-list" id="realisateur">
-                    <input type="checkbox" id="realisateur-checkbox" name="realisateur">
+                    <input type="checkbox" id="realisateur-checkbox" class="unchecked" name="realisateur">
                     <label for="realisateur-checkbox" class="job-name">Realisateur</label>
                     <div class="job-detail">
                         <input type="button" class="addItem" id="realisateur-add" value="Ajouter un film">
                     </div>
                 </div>
                 <div class="job-list" id="chanteur">
-                    <input type="checkbox" id="chanteur-checkbox" name="chanteur">
+                    <input type="checkbox" id="chanteur-checkbox" class="unchecked" name="chanteur">
                     <label for="chanteur-checkbox" class="job-name">Chanteur</label>
                     <div class="job-detail">
                         <div class="col-6">
@@ -115,6 +211,15 @@
                                 <input type="text" name="chanteur_specialite" id="chanteur-specialite">
                             </div>
                             <input type="button" class="addItem" id="chanteur-add" value="Ajouter un album">
+                        </div>
+                        <div class="form-item" style="display: none">
+                            <label for="select_maison"></label>
+                            <select id="select_maison">
+                                <option></option>
+                                {{#each maisons_de_disque}}
+                                    <option value="{{this.id}}">{{this.nom}}</option>
+                                {{/each}}
+                            </select>
                         </div>
                         <div class="col-6">
                             <div class="form-item">
@@ -138,7 +243,7 @@
                     </div>
                 </div>
                 <div class="job-list" id="mannequin">
-                    <input type="checkbox" id="mannequin-checkbox" name="mannequin">
+                    <input type="checkbox" id="mannequin-checkbox" class="unchecked" name="mannequin">
                     <label for="mannequin-checkbox" class="job-name">Mannequin</label>
                     <div class="job-detail">
                         <div class="col-6">
@@ -155,12 +260,9 @@
                                     {{/each}}
                                 </select>
                             </div>
-                        </div>
-                        <input type="button" class="addItem" id="mannequin-add" value="Ajouter un défilé"><div class="col-6">
-                        <div>
-                            <div class="form-item">
-                                <label for="model_lieu_0">Défilé 1 : </label>
-                                <select name="model_defile_lieu_0" id="model_lieu_0">
+                            <div class="form-item" style="display: none">
+                                <label for="select_defile"></label>
+                                <select id="select_defile">
                                     <option></option>
                                     {{#each defiles}}
                                         <option value="{{this.id}}">{{this.lieu}} le {{formatDate this.date 'LLLL'}}</option>
@@ -168,11 +270,26 @@
                                 </select>
                             </div>
                         </div>
+                        <div>
+                            <div class="col-6">
+                                <div class="form-item">
+                                    <label for="model_lieu_0">Défilé 1 : </label>
+                                    <select name="model_defile_lieu_0" id="model_lieu_0">
+                                        <option></option>
+                                        {{#each defiles}}
+                                            <option value="{{this.id}}">{{this.lieu}} le {{formatDate this.date 'LLLL'}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="button" class="addItem" id="mannequin-add" value="Ajouter un défilé"><div class="col-6">
+
                     </div>
                     </div>
                 </div>
                 <div class="job-list" id="couturier">
-                    <input type="checkbox" id="couturier-checkbox" name="couturier">
+                    <input type="checkbox" id="couturier-checkbox" class="unchecked" name="couturier">
                     <label for="couturier-checkbox" class="job-name">Couturier</label>
                     <div class="job-detail">
                         <input type="button" class="addItem" id="couturier-add" value="Ajouter un défilé">

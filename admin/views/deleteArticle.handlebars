@@ -1,0 +1,33 @@
+{{>menu-admin-article}}
+{{#if article}}
+    <fieldset>
+        <legend>Suppression d'un article</legend>
+        <div>
+            <form action=""
+                  method="post"
+                  id="delete_photo">
+                <div class="col-6 form-item">
+                    <label for="article_to_delete">Nom de l'article : </label>
+                    <select name="article_to_delete" id="article_to_delete" required>
+                        <option></option>
+                        {{#each article}}
+                            <option value="{{this.id}}">{{this.titre}} du {{formatDate this.date "DD MMMM YYYY"}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div>
+                    <h4 class="label-preview">Aperçu : </h4>
+                    <textarea cols="50" rows="5" id="preview" data-id="article_preview_" readonly></textarea>
+                    {{#each article}}
+                        <textarea cols="50" rows="5" id="preview" data-id="article_preview_{{this.id}}" readonly>{{this.resume}}</textarea>
+                    {{/each}}
+                </div>
+
+                <input type="submit" value="Supprimer">
+                <input type="reset" id="photo_reset">
+            </form>
+        </div>
+    </fieldset>
+{{else}}
+    <script>location.href = `${location.origin}/article`</script>
+{{/if}}
