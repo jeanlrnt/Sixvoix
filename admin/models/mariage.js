@@ -55,7 +55,7 @@ module.exports.addMariages = (id, mariages) => {
     for (let i = 0; i < mariages.length; i += 5) {
         if (mariages[i] !== '' && mariages[i + 1] !== '' && mariages[i + 2] !== '') {
             this.addMariage(id, mariages[i + 2], mariages[i], mariages[i + 1], mariages[i + 3], mariages[i + 4], (err) => {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
             })
         }
     }

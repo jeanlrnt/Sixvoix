@@ -17,14 +17,11 @@
         <ul>
             <li {{#ifCond session.menu '==' 'home'}}class="menu_selected"{{/ifCond}}>
                 <a href="/accueil">ACCUEIL</a>
-            </li>
-            <li {{#ifCond session.menu '==' 'repertoire'}}class="menu_selected"{{/ifCond}}>
+            </li><li {{#ifCond session.menu '==' 'repertoire'}}class="menu_selected"{{/ifCond}}>
                 <a href="/repertoire">REPERTOIRE DES STARS</a>
-            </li>
-            <li {{#ifCond session.menu '==' 'album'}}class="menu_selected"{{/ifCond}}>
+            </li><li {{#ifCond session.menu '==' 'album'}}class="menu_selected"{{/ifCond}}>
                 <a href="/album">ALBUM PHOTO</a>
-            </li>
-            <li {{#ifCond session.menu '==' 'article'}}class="menu_selected"{{/ifCond}}>
+            </li><li {{#ifCond session.menu '==' 'article'}}class="menu_selected"{{/ifCond}}>
                 <a href="/articles">ARTICLES</a>
             </li>
         </ul>

@@ -5,7 +5,7 @@
   "version": "0.1.4",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js && nodemon ../admin/app.js"
+    "dev": "nodemon app.js"
   },
   "dependencies": {
     "async": "3.2.0",

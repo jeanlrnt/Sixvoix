@@ -159,7 +159,7 @@ module.exports.removePhoto = (id, photo, callback) => {
  */
 module.exports.removePhotosVip = (id) => {
     this.getVipAllPhotos(id, (err, result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         if (result[0] !== undefined) {
             for (const photo of result) {
                 this.removePhotoVip(id, photo)
@@ -174,12 +174,12 @@ module.exports.removePhotosVip = (id) => {
  */
 module.exports.removePhotoVip = (id, photo) => {
     this.removePhoto(id, photo.id, (err, _result) => {
-        if (err) return console.log(err)
+        if (err) return console.error(err)
         let address = __dirname + '../../../common/images/vip/' + photo.adresse;
         fs.stat(address, (err1, _result1) => {
-            if (err1) return console.log(err1)
+            if (err1) return console.error(err1)
             fs.unlink(address, (err2, _result2) => {
-                if (err2) return console.log(err2);
+                if (err2) return console.error(err2);
             });
         });
     })

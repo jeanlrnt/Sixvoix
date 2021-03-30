@@ -151,13 +151,13 @@ module.exports.updateArticle = (id, resume, callback) => {
  */
 module.exports.removeArticlesVip = (id) => {
     this.getArticlesVip(id, (err, result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         if (result[0] !== undefined) {
             for (const article_num of result) {
                 this.removeAPourSujetArticle(article_num.ARTICLE_NUMERO, (err1, _result1) => {
-                    if (err1) return console.log(err1);
+                    if (err1) return console.error(err1);
                     this.removeArticle(article_num.ARTICLE_NUMERO, (err2, _result2) => {
-                        if (err2) return console.log(err2);
+                        if (err2) return console.error(err2);
                     })
                 })
             }

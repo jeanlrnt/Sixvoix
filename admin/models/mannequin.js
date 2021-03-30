@@ -180,11 +180,11 @@ module.exports.updateMannequin = (id, taille, callback) => {
  */
 module.exports.removeMannequinFully = (id) => {
     this.removeMannequinAgence(id, (err, _result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         this.removeMannequinDefileDans(id, (err1, _result1) => {
-            if (err1) return console.log(err1);
+            if (err1) return console.error(err1);
             this.removeMannequin(id, (err2, _result2) => {
-                if (err2) return console.log(err2);
+                if (err2) return console.error(err2);
             })
         })
     })
@@ -198,7 +198,7 @@ module.exports.addDefilesMannequin = (id, defiles) => {
     for (let i = 0; i < defiles.length; i++) {
         if (defiles[i] !== '') {
             this.addVipDefile(id, defiles[i], (err, _result) => {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
             });
         }
     }
@@ -212,9 +212,9 @@ module.exports.addDefilesMannequin = (id, defiles) => {
  */
 module.exports.addMannequinFully = (id, defiles, taille, agence) => {
     this.addMannequin(id, taille, (err, _result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         this.addVipAgence(id, agence, (err1, _result1) => {
-            if (err1) return console.log(err1);
+            if (err1) return console.error(err1);
             this.addDefilesMannequin(id, defiles)
         })
     })

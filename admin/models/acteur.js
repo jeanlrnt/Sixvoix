@@ -130,9 +130,9 @@ module.exports.getVipRoles = (id, callback) => {
  */
 module.exports.removeActeurFully = (id) => {
     this.removeRolesActeur(id, (err, _result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         this.removeActeur(id, (err1, _result1) => {
-            if (err1) return console.log(err1);
+            if (err1) return console.error(err1);
         })
     })
 }
@@ -145,7 +145,7 @@ module.exports.addVipRoles = (id, roles) => {
     for (let i = 0; i < roles.length; i += 2) {
         if (roles[i] !== '' && roles[i + 1] !== '') {
             this.addVipRole(id, roles[i], roles[i + 1], (err, _result) => {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
             });
         }
     }
@@ -158,7 +158,7 @@ module.exports.addVipRoles = (id, roles) => {
  */
 module.exports.addActeurFully = (id, roles, debut) => {
     this.addActeur(id, debut, (err, _result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         this.addVipRoles(id, roles);
     })
 }

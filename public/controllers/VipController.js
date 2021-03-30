@@ -8,7 +8,7 @@ module.exports.Repertoire = function(request, response){
     request.session.menu = 'repertoire';
     response.title = 'Répertoire des stars';
     vipModel.getRepertoireLetters((err, result) => {  // appel le module repertoire qui exécute la requete SQL
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         response.letters = result; // result contient un array des 1eres lettres des noms des vip
 
         response.render('repertoireVips', response); // appel la vue Handlebars qui va afficher le résultat
@@ -25,7 +25,7 @@ module.exports.Card = function (request, response) {
         function (callback){vipModel.getRepertoireLetters( (err, result) => {callback(null, result)});},
         function (callback){vipModel.getRepertoireResult(lettre,((err, result) => {callback(null, result)}));}],
          (err, result) => {
-            if (err) return console.log(err);
+            if (err) return console.error(err);
 
             response.letters = result[0];
             response.vip = result[1];
@@ -51,7 +51,7 @@ module.exports.Personne = function (request, response) {
         function (callback){vipModel.getVipPhotos(id,((err, result) => {callback(null, result)}))}
         ],
          (err, result) => {
-            if (err) return console.log(err);
+            if (err) return console.error(err);
 
             if (result[1][0] !== undefined) {
                 response.title = result[1][0].prenom + ' ' + result[1][0].nom.toUpperCase();

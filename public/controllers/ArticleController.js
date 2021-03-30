@@ -12,7 +12,7 @@ module.exports.Articles = function(request, response){
                 articleModel.getAllVipAuteur((err, result) => {callback(null, result)});
             }],
         (err, result) => {
-            if (err) return console.log(err);
+            if (err) return console.error(err);
 
             response.vips = result[0];
 
@@ -35,7 +35,7 @@ module.exports.Article = function(request, response){
                 vipModel.getVipInfos(id,((err, result) => {callback(null, result)}));
             }],
         (err, result) => {
-            if (err) return console.log(err);
+            if (err) return console.error(err);
 
             if (result[2][0] !== undefined) {
                 response.title = 'Articles par ' + result[2][0].prenom + ' ' + result[2][0].nom.toUpperCase()

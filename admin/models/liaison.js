@@ -48,7 +48,7 @@ module.exports.addLiaisons = (id, liaisons) => {
     for (let i = 0; i < liaisons.length; i += 3) {
         if (liaisons[i] !== '' && liaisons[i + 1] !== '') {
             this.addLiaison(id, liaisons[i + 1], liaisons[i], liaisons[i + 2], (err, _result) => {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
             })
         }
     }

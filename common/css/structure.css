@@ -43,7 +43,7 @@ body {
     font-weight: bold;
     display: inline-flex;
     min-width: 15%;
-    margin: 0 -.2em;
+    margin: 0;
     border-right: 1px solid white;
     border-top: 1px solid white;
 }

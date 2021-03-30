@@ -12,7 +12,7 @@ module.exports.ListerAlbum = function(request, response){
                 albumModel.getPhotoProfile((err, result) => {callback(null, result)});
             }],
         (err, result) => {
-            if (err) return console.log(err);
+            if (err) return console.error(err);
 
             response.pplist = result[0];
 
@@ -35,7 +35,7 @@ module.exports.AlbumVip = function(request, response){
                 vipModel.getVipInfos(id, (err, result) => {callback(null, result)});
             }],
         (err, result) => {
-            if (err) return console.log(err);
+            if (err) return console.error(err);
 
             if (result[2][0] !== undefined) {
                 response.title = 'Photos de ' + result[2][0].prenom + ' ' + result[2][0].nom.toUpperCase()

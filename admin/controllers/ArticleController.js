@@ -18,7 +18,7 @@ module.exports.Index = function(request, response){
                 vipModel.getAllVipsWithArticleNum(function(err, result) {callback(null, result)})
             }],
         function (err, result) {
-            if (err) return console.log(err);
+            if (err) return console.error(err);
 
             let header = []
             for (const element in result[0][0]) {
@@ -52,16 +52,16 @@ module.exports.AddArticle = function(request, response){
             function (callback){
                 if (vip_num !== undefined) {
                     articleModel.addArticle(request.body.article_titre, request.body.article_resume, request.body.article_exemplaire,function (err, result){
-                        if (err) return console.log(err)
+                        if (err) return console.error(err)
                         articleModel.addVipArticle(vip_num, result.insertId, function (err1, result1){
-                            if (err1) return console.log(err1)
+                            if (err1) return console.error(err1)
                         })
                     })
                 }
                 callback(null, null)
             }],
         function (err, result) {
-            if (err) return console.log(err)
+            if (err) return console.error(err)
 
             response.vips = result[0];
             response.exemplaires = result[1];
@@ -88,16 +88,16 @@ module.exports.DeleteArticle = function(request, response){
             function (callback){
                 if(article_num !== undefined){
                     articleModel.removeAPourSujetArticle(article_num, function (err, result){
-                        if (err) return console.log(err)
+                        if (err) return console.error(err)
                         articleModel.removeArticle(article_num, function (err1, result1){
-                            if (err1) return console.log(err1)
+                            if (err1) return console.error(err1)
                         })
                     })
                 }callback(null, null)
             }
         ],
         function (err, result) {
-            if (err) return console.log(err)
+            if (err) return console.error(err)
 
             response.article = result[0];
 
@@ -122,14 +122,14 @@ module.exports.EditArticle = function(request, response){
             function (callback){
                 if(article_num !== undefined){
                     articleModel.updateArticle(article_num, request.body.article_edited, function (err, result) {
-                        if (err) return console.log(err)
+                        if (err) return console.error(err)
                     })
                 }
                 callback(null, null)
             }
         ],
         function (err, result) {
-            if (err) return console.log(err)
+            if (err) return console.error(err)
 
             response.article = result[0];
 

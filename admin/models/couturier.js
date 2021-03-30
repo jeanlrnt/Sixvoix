@@ -179,16 +179,16 @@ module.exports.removeDefileDansDefile = (id, callback) => {
  */
 module.exports.removeCouturierFully = (id) => {
     this.getDefileCouturier(id, (err, result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         if (result[0] !== undefined) {
             for (const [i, defile_num] of result.entries()) {
                 this.removeDefileDansDefile(defile_num.DEFILE_NUMERO, (err1, _result1) => {
-                    if (err1) return console.log(err1);
+                    if (err1) return console.error(err1);
                     this.removeDefile(defile_num.DEFILE_NUMERO, (err2, _result2) => {
-                        if (err2) return console.log(err2);
+                        if (err2) return console.error(err2);
                         if (i === result.length - 1) {
                             this.removeCouturier(id, (err3, _result3) => {
-                                if (err3) return console.log(err3);
+                                if (err3) return console.error(err3);
                             })
                         }
                     })
@@ -196,7 +196,7 @@ module.exports.removeCouturierFully = (id) => {
             }
         } else {
             this.removeCouturier(id, (err3, _result3) => {
-                if (err3) return console.log(err3);
+                if (err3) return console.error(err3);
             })
         }
     })
@@ -211,11 +211,11 @@ module.exports.addDefiles = (id, defiles) => {
         if (defiles[i + 1] !== '' && defiles[i + 2] !== '') {
             if (defiles[i] !== '') {
                 this.updateDefile(defiles[i], defiles[i + 1], defiles[i + 2], (err, _result) => {
-                    if (err) return console.log(err);
+                    if (err) return console.error(err);
                 })
             } else {
                 this.addVipDefileOrga(id, defiles[i + 1], defiles[i + 2], (err, _result3) => {
-                    if (err) return console.log(err);
+                    if (err) return console.error(err);
                 });
             }
         }
@@ -228,7 +228,7 @@ module.exports.addDefiles = (id, defiles) => {
  */
 module.exports.addCouturierFully = (id, defiles) => {
     this.addCouturier(id, (err, _result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         this.addDefiles(id, defiles)
     })
 }

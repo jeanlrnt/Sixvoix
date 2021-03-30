@@ -187,16 +187,16 @@ module.exports.getAlbumsVip = (id, callback) => {
  */
 module.exports.removeChanteurFully = (id) => {
     this.getAlbumsChanteur(id, (err, result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         if (result[0] !== undefined) {
             for (const [i, album_num] of result.entries()) {
                 this.removeComposer(id, album_num.ALBUM_NUMERO, (err1, _result1) => {
-                    if (err1) return console.log(err1);
+                    if (err1) return console.error(err1);
                     this.removeAlbum(album_num.ALBUM_NUMERO, (err2, _result2) => {
-                        if (err2) return console.log(err2);
+                        if (err2) return console.error(err2);
                         if (i === result.length-1) {
                             this.removeChanteur(id, (err3, _result3) => {
-                                if (err3) return console.log(err3);
+                                if (err3) return console.error(err3);
                             })
                         }
                     })
@@ -204,7 +204,7 @@ module.exports.removeChanteurFully = (id) => {
             }
         } else {
             this.removeChanteur(id, (err3, _result3) => {
-                if (err3) return console.log(err3);
+                if (err3) return console.error(err3);
             })
         }
     })
@@ -218,9 +218,9 @@ module.exports.addAlbums = (id, albums) => {
     for (let i = 0; i < albums.length; i += 3) {
         if (albums[i] !== '' && albums[i + 1] !== '' && albums[i + 2] !== '') {
             this.addAlbum(albums[i], albums[i + 1], albums[i + 2], (err, result) => {
-                if (err) return console.log(err);
+                if (err) return console.error(err);
                 this.addAlbumToVip(id, result.insertId, (err1, _result1) => {
-                    if (err1) return console.log(err1);
+                    if (err1) return console.error(err1);
                 })
             })
         }
@@ -234,7 +234,7 @@ module.exports.addAlbums = (id, albums) => {
  */
 module.exports.addChanteurFully = (id, albums, specialite) => {
     this.addChanteur(id, specialite, (err, _result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         this.addAlbums(id, albums)
     })
 }

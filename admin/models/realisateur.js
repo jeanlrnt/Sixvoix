@@ -181,16 +181,16 @@ module.exports.updateFilm = (id,date ,titre, callback) => {
  */
 module.exports.removeRealisateurFully = (id) => {
     this.getFilmsRealisateur(id, (err, result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         if (result[0] !== undefined) {
             for (const [i, film_num] of result.entries()) {
                 this.removeFilmRoles(film_num.FILM_NUMERO, (err1, _result1) => {
-                    if (err1) return console.log(err1);
+                    if (err1) return console.error(err1);
                     this.removeFilm(film_num.FILM_NUMERO, (err2, _result2) => {
-                        if (err2) return console.log(err2);
+                        if (err2) return console.error(err2);
                         if (i === result.length - 1) {
                             this.removeRealisateur(id, (err3, _result3) => {
-                                if (err3) return console.log(err3);
+                                if (err3) return console.error(err3);
                             })
                         }
                     })
@@ -198,7 +198,7 @@ module.exports.removeRealisateurFully = (id) => {
             }
         } else {
             this.removeRealisateur(id, (err1, _result1) => {
-                if (err1) return console.log(err1);
+                if (err1) return console.error(err1);
             })
         }
     })
@@ -213,11 +213,11 @@ module.exports.addFilms = (id, films) => {
         if (films[i + 1] !== '' && films[i + 2] !== '') {
             if (films[i] !== '') {
                 this.updateFilm(films[i], films[i + 1], films[i + 2], (err1, _result1) => {
-                    if (err1) return console.log(err1);
+                    if (err1) return console.error(err1);
                 });
             } else {
                 this.addVipFilm(id, films[i + 1], films[i + 2], (err1, _result1) => {
-                    if (err1) return console.log(err1);
+                    if (err1) return console.error(err1);
                 });
             }
         }
@@ -230,7 +230,7 @@ module.exports.addFilms = (id, films) => {
  */
 module.exports.addRealisateurFully = (id, films) => {
     this.addRealisateur(id, (err, _result) => {
-        if (err) return console.log(err);
+        if (err) return console.error(err);
         this.addFilms(id, films)
     })
 }
