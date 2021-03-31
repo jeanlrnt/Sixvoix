@@ -187,7 +187,7 @@ module.exports.DeleteVIPId = function (request, response) {
             if (err) return console.error(err);
             response.redirect('/vip')
         })
-    }, 50)
+    }, 100)
 }
 
 module.exports.EditVIP = function (request, response) {
@@ -349,7 +349,7 @@ module.exports.EditVIP = function (request, response) {
                             }
                         })
                     });
-                    callback(null, 'Le vip a bien été modifié')
+                    callback(null, (['type', 'edit']))
                 } else {
                     callback(null, null)
                 }
@@ -457,6 +457,7 @@ module.exports.EditVIP = function (request, response) {
         (err, result) => {
             if (err) return console.error(err)
 
+            response.reponseRequette = result[0];
             response.vip = result[1];
             response.nationalites = result[2];
             response.conjoint = result[4];
@@ -477,7 +478,6 @@ module.exports.EditVIP = function (request, response) {
             response.defiles = result[16];
             response.couturier = result[20];
             response.couturier_defiles = result[17];
-
 
             response.render('editVIP', response);
         }

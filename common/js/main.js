@@ -200,7 +200,7 @@ $('.addItem').each(function(){
                 })
                 $(this).parent().append(`<div class="form-item">
                             <label for="acteur_role_${film_num}">Rôle : </label>
-                            <input type="text" name="acteur_film_role_${film_num}" id="acteur_role_${film_num}">
+                            <input type="text" maxlength="50" name="acteur_film_role_${film_num}" id="acteur_role_${film_num}">
                         </div>
                         <div class="form-item">
                             <label for="acteur_titre_${film_num}">Film : </label>
@@ -219,7 +219,7 @@ $('.addItem').each(function(){
                         </div>
                         <div class="form-item">
                             <label for="real_titre_${real_num}">Film : </label>
-                            <input type="text" name="real_film_titre_${real_num}" id="real_titre_${real_num}">
+                            <input type="text" maxlength="80" name="real_film_titre_${real_num}" id="real_titre_${real_num}">
                         </div>
                     </div>`)
                 real_num++
@@ -237,7 +237,7 @@ $('.addItem').each(function(){
                         </div>
                         <div class="form-item">
                             <label for="album_titre_${chant_num}">Titre : </label>
-                            <input type="text" name="chant_album_titre_${chant_num}" id="album_titre_${chant_num}">
+                            <input type="text" maxlength="20" name="chant_album_titre_${chant_num}" id="album_titre_${chant_num}">
                         </div>
                         <div class="form-item">
                             <label for="album_prod_${chant_num}">Maison de disque : </label>
@@ -275,7 +275,7 @@ $('.addItem').each(function(){
                         </div>
                         <div class="form-item">
                             <label for="couturier_lieu_${couturier_num}">Lieu : </label>
-                            <input type="text" name="couturier_defile_lieu_${couturier_num}" id="couturier_lieu_${couturier_num}">
+                            <input type="text" maxlength="20" name="couturier_defile_lieu_${couturier_num}" id="couturier_lieu_${couturier_num}">
                         </div>
                     </div>`)
                 couturier_num++
@@ -293,11 +293,11 @@ $('.addItem').each(function(){
                     <div class="col-6">
                         <div class="form-item">
                             <label for="image_sujet">Sujet : </label>
-                            <textarea name="image_sujet" id="image_sujet" rows="2"></textarea>
+                            <textarea maxlength="220" name="image_sujet" id="image_sujet" rows="2"></textarea>
                         </div>
                         <div class="form-item">
                             <label for="image_detail">Detail : </label>
-                            <textarea name="image_detail" id="image_detail" rows="2"></textarea>
+                            <textarea maxlength="250" name="image_detail" id="image_detail" rows="2"></textarea>
                         </div>
                     </div>
                 </div>`);
@@ -315,7 +315,7 @@ $('.addItem').each(function(){
                         </div>
                         <div class="form-item">
                             <label for="mariage_vip_lieu_${mariage_num}">Lieu : </label>
-                            <input type="text" name="mariage_vip_lieu_${mariage_num}" id="mariage_vip_lieu_${mariage_num}">
+                            <input type="text" maxlength="20" name="mariage_vip_lieu_${mariage_num}" id="mariage_vip_lieu_${mariage_num}">
                         </div>
                         <div class="form-item">
                             <label for="mariage_vip_conjoint_${mariage_num}">Conjoint : </label>
@@ -333,7 +333,7 @@ $('.addItem').each(function(){
                         </div>
                         <div class="form-item rupture">
                             <label for="mariage_vip_motif_fin_${mariage_num}">Motif : </label>
-                            <input type="text" name="mariage_vip_motif_fin_${mariage_num}" id="mariage_vip_motif_fin_${mariage_num}">
+                            <input type="text" maxlength="50" name="mariage_vip_motif_fin_${mariage_num}" id="mariage_vip_motif_fin_${mariage_num}">
                         </div>
                     </div>`)
                 $(`#mariage_vip_rupture_checkbox_${mariage_num}`).on('click', function() {
@@ -368,7 +368,7 @@ $('.addItem').each(function(){
                             </div>
                             <div class="form-item rupture">
                                 <label for="liaison_vip_motif_fin_${liaison_num}">Motif : </label>
-                                <input type="text" name="liaison_vip_motif_fin_${liaison_num}" id="liaison_vip_motif_fin_${liaison_num}">
+                                <input type="text" maxlength="50" name="liaison_vip_motif_fin_${liaison_num}" id="liaison_vip_motif_fin_${liaison_num}">
                             </div>
                         </div>`)
                 $(`#liaison_vip_rupture_checkbox_${liaison_num}`).on('click', function() {
@@ -405,6 +405,16 @@ $('form#delete_vip').on('submit', function(e) {
     e.preventDefault();
     location.href = `${location.origin}/vip/delete/${$('#vip_to_delete').val()}`
 })
+
+$('form#edit_vip').ready(() => {
+    if ($('#vip_edited')[0] !== undefined) {
+        setTimeout(() => {
+            location.href = location.href
+        }, 0)
+    }
+})
+
+
 
 $('[data-id^=article_preview_]:not([data-id=article_preview_])').hide()
 $('#article_to_delete').on('change', function() {

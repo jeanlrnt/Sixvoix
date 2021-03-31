@@ -13,11 +13,11 @@
             <div class="col-6">
                 <div class="form-item">
                     <label for="nom">Nom* : </label>
-                    <input type="text" name="nom" id="nom" required>
+                    <input type="text" maxlength="20" name="nom" id="nom" required>
                 </div>
                 <div class="form-item">
                     <label for="prenom">Prénom* : </label>
-                    <input type="text" name="prenom" id="prenom" required>
+                    <input type="text" maxlength="20" name="prenom" id="prenom" required>
                 </div>
                 <div class="form-item">
                     <label for="sexe">Sexe : </label>
@@ -43,7 +43,7 @@
             </div>
             <div class="form-item">
                 <label for="commentaire">Commentaire : </label>
-                <textarea name="commentaire" id="commentaire" rows="5" required></textarea>
+                <textarea name="commentaire" maxlength="2500" id="commentaire" rows="5" required></textarea>
             </div>
             <fieldset>
                 <legend>Photos</legend>
@@ -91,7 +91,7 @@
                             </div>
                             <div class="form-item">
                                 <label for="mariage_vip_lieu_0">Lieu : </label>
-                                <input type="text" name="mariage_vip_lieu_0" id="mariage_vip_lieu_0">
+                                <input type="text" maxlength="20" name="mariage_vip_lieu_0" id="mariage_vip_lieu_0">
                             </div>
                             <div class="form-item">
                                 <label for="mariage_vip_conjoint_0">Conjoint : </label>
@@ -112,7 +112,7 @@
                             </div>
                             <div class="form-item rupture">
                                 <label for="mariage_vip_motif_fin_0">Motif : </label>
-                                <input type="text" name="mariage_vip_motif_fin_0" id="mariage_vip_motif_fin_0">
+                                <input type="text" maxlength="20" name="mariage_vip_motif_fin_0" id="mariage_vip_motif_fin_0">
                             </div>
                         </div>
                         <input type="button" class="addItem" id="mariage-add" value="Ajouter un mariage">
@@ -151,7 +151,7 @@
                             </div>
                             <div class="form-item rupture">
                                 <label for="liaison_vip_motif_fin_0">Motif : </label>
-                                <input type="text" name="liaison_vip_motif_fin_0" id="liaison_vip_motif_fin_0">
+                                <input type="text" maxlength="50" name="liaison_vip_motif_fin_0" id="liaison_vip_motif_fin_0">
                             </div>
                         </div>
                         <input type="button" class="addItem" id="liaison-add" value="Ajouter une liaison">
@@ -181,7 +181,7 @@
                         </div>
                         <div class="form-item">
                             <label for="acteur_role_0">Rôle : </label>
-                            <input type="text" name="acteur_film_role_0" id="acteur_role_0">
+                            <input type="text" maxlength="50" name="acteur_film_role_0" id="acteur_role_0">
                         </div>
                         <div class="form-item">
                             <label for="acteur_titre_0">Film : </label>
@@ -208,7 +208,7 @@
                         <div class="col-6">
                             <div class="form-item">
                                 <label for="chanteur-specialite">Spécialité : </label>
-                                <input type="text" name="chanteur_specialite" id="chanteur-specialite">
+                                <input type="text" maxlength="20" name="chanteur_specialite" id="chanteur-specialite">
                             </div>
                             <input type="button" class="addItem" id="chanteur-add" value="Ajouter un album">
                         </div>
@@ -228,7 +228,7 @@
                             </div>
                             <div class="form-item">
                                 <label for="album_titre_0">Titre : </label>
-                                <input type="text" name="chant_album_titre_0" id="album_titre_0">
+                                <input type="text" maxlength="20" name="chant_album_titre_0" id="album_titre_0">
                             </div>
                             <div class="form-item">
                                 <label for="album_prod_0">Maison de disque : </label>
@@ -249,7 +249,7 @@
                         <div class="col-6">
                             <div class="form-item">
                                 <label for="mannequin-taille">Taille : </label>
-                                <input type="text" name="mannequin_taille" id="mannequin-taille">
+                                <input type="number" name="mannequin_taille" id="mannequin-taille">
                             </div>
                             <div class="form-item">
                                 <label for="mannequin-agence">Agence : </label>

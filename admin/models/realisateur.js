@@ -220,6 +220,15 @@ module.exports.addFilms = (id, films) => {
                     if (err1) return console.error(err1);
                 });
             }
+        } else {
+            if (films[i] !== '') {
+                this.removeFilmRoles(films[i], (err1, _result1) => {
+                    if (err1) return console.error(err1);
+                    this.removeFilm(films[i], (err2, _result2) => {
+                        if (err2) return console.error(err2);
+                    })
+                })
+            }
         }
     }
 }

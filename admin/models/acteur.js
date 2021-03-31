@@ -10,7 +10,7 @@ module.exports.addActeur = (id, debut, callback) => {
         if (!err) {
             let sql = `INSERT INTO acteur SET 
                             VIP_NUMERO=${connexion.escape(id)}, 
-                            ACTEUR_DATEDEBUT='${connexion.escape(debut)}';`;
+                            ACTEUR_DATEDEBUT=${connexion.escape(debut)}`;
 
             connexion.query(sql, callback);
             connexion.release();
@@ -27,7 +27,7 @@ module.exports.updateActeur = (id, debut, callback) => {
     db.getConnection((err, connexion) => {
         if (!err) {
             let sql = `UPDATE acteur 
-                        SET ACTEUR_DATEDEBUT="${connexion.escape(debut)}"
+                        SET ACTEUR_DATEDEBUT=${connexion.escape(debut)}
                         WHERE VIP_NUMERO=${connexion.escape(id)}`;
 
             connexion.query(sql, callback);

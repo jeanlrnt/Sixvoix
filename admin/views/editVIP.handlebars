@@ -1,5 +1,7 @@
 {{>menu-admin}}
-{{reponseRequette}}
+{{#if reponseRequette}}
+    <p id="vip_edited"></p>
+{{/if}}
 {{#if vip}}
     <fieldset id="admin-container">
         <legend>
@@ -7,7 +9,8 @@
         </legend>
         <div>
             <form action=""
-                  method="post">
+                  method="post"
+                  id="edit_vip">
                 <div class="col-6">
                     <div class="form-item">
                         <label for="nom">Nom* : </label>
