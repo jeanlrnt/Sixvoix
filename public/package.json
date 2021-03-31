@@ -4,8 +4,8 @@
   "private": true,
   "version": "0.1.4",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "npm up && node app.js",
+    "dev": "npm up && nodemon app.js"
   },
   "dependencies": {
     "async": "3.2.0",
