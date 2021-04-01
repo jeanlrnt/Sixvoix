@@ -1,5 +1,5 @@
 # S I X V O I X
-=======
+
 Application SixVoix de l'IUT en **Node.js** pour la partie serveur et **jQuery** pour la partie client.  
 
 Pour cloner le dépôt, vous pouvez taper :  
