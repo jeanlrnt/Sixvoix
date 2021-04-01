@@ -9,11 +9,11 @@
 let mysql = require('mysql'); // voir https://github.com/felixge/node-mysql/
 
 let pool  = mysql.createPool({
-  host      : '', //ip, nom de domaine de la base de donnée ex : 'localhost'
-  user      : '', //identifiant de l'utilisateur de la base ex : 'bd'
-  password  : '', //mot de passe associé à l'identifiant ex : 'bede'
-  database  : '', //nom de la base de donnée ex : 'vip'
-  port      : '' //port d'écoute de MariaDB ex : '3306'
+    host      : 'localhost', //ip, nom de domaine de la base de donnée ex : 'localhost'
+    user      : 'root', //identifiant de l'utilisateur de la base ex : 'bd'
+    password  : 'root', //mot de passe associé à l'identifiant ex : 'bede'
+    database  : 'vip', //nom de la base de donnée ex : 'vip'
+    port      : '3306' //port d'écoute de MariaDB ex : '3306'
 });
 
 module.exports.getConnection = function(callback) {

@@ -13,7 +13,6 @@ module.exports.Index = function(request, response){
     request.session.menu = 'article'
     response.title = 'Admin Article';
     async.parallel([
-
             function (callback){
                 vipModel.getAllVipsWithArticleNum(function(err, result) {callback(null, result)})
             }],
