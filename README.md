@@ -14,6 +14,10 @@ Il existe une version admin et une version public disponibles respectivement dan
 Pour démarer chaque serveur, il faut se rendre dans le repertoire voulu (admin ou public) puis effectuer l'une des commandes suivantes : `npm run start` ou `npm run dev`.  
 
 La première commande lancera le programme automatiquement avec node alors que l'autre utilisera le package nodemon. Dans les deux cas, la commande effectuera une mise à jour des packages npm.  
+Néanmoins, si vous préférez utiliser les commandes les unes à la suite des autres, vous pouvez effectuer la suite de commandes suivantes (toujours dans le repertoire voulu) :  
+`npm install` pour télécharger les packages npm  
+`npm update` pour mettre à jour les packages npm  
+`node app` pour lancer le serveur  
 
 Le serveur admin est à l'écoute du port `6900` et le serveur public est lui à l'écoute du port `6800`.
 
