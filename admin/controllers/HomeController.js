@@ -28,6 +28,7 @@ module.exports.Connexion = function (request, response) {
     adminModel.getUser(request.body.utilisateur, function (err, result) {
         if (result[0] !== undefined && request.body.mot_de_passe !== '') {
             let cryptr = new Cryptr('MaSuperCléDeChiffrementDeouF');
+            console.log(cryptr.encrypt('TakeTheLongWayHome'))
             let decryptedString = cryptr.decrypt(result[0].password)
             if (request.body.mot_de_passe === decryptedString) {
                 request.session.username = request.body.utilisateur
